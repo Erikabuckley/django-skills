@@ -11,9 +11,18 @@
     <p>
         This is the demo application for the course
         <em>Django Fundamentals</em>
-        
     </p>
 
+    <h2>Meetings</h2>
+
+    <ul>
+        {% for meeting in meetings %}
+        <li>
+            <a href="{% url 'detail' meeting.id %}">
+                {{meeting.title}}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
-

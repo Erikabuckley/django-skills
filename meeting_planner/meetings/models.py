@@ -22,4 +22,3 @@ class Meeting(models.Model):
     #as we only added behavior we dont need to make migration
     def __str__(self):
         return f"{self.title} at {self.start_time} on {self.date}"
-
