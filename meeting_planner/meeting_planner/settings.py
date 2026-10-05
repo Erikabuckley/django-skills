@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "website" #app is installed as part of the project
+    "website", #app is installed as part of the project
+    "meetings",
 ]
 
 MIDDLEWARE = [
