@@ -16,15 +16,14 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 from website.views import welcome, about
-from meetings.views import detail, rooms_list
 
+#we add names to enable us e to maintain url mappings easier
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', welcome, name="welcome"), #when user goes to this page its handled by the view function
+    path('', welcome, name="welcome"),
     path('about', about),
-    path('meetings/<int:id>', detail, name='detail'),
-    path('rooms', rooms_list, name='rooms') 
+    path('meetings/',include('meetings.urls'))
 ]

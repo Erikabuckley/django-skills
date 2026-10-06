@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Welcome!</Title>
-</head>
-
-<body>
+{% extends "base.html" %}
+{% block title%}Welcome{%endblock%}
+{% block content%}
     <h1>Welcome to the Meeting Planner!</h1>
 
     <p>
@@ -24,5 +19,4 @@
         </li>
         {% endfor %}
     </ul>
-</body>
-</html>
+{%endblock%}

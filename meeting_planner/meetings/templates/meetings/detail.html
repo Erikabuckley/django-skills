@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Meeting: {{meeting.title}}</Title>
-</head>
+{% extends "base.html" %}
 
-<body>
+{% block title%}Meeting: {{meeting.title}}{%endblock%}
+
+{% block content%}
     <h1>{{meeting.title}}</h1>
 
     <p>
@@ -15,7 +12,4 @@
     <p> 
         To go home <a href="{% url 'welcome' %}">click here</a>
     </p>
-
-</body>
-</html>
-
+{%endblock%}
