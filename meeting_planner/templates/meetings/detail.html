@@ -9,6 +9,15 @@
     This meeting has been scheduled on {{meeting.date}}, at {{meeting.start_time}} in <strong>{{meeting.room_number}}</strong>  
 </p>
 
+<h2>Participants</h2>
+<ul>
+    {% for participant in participants.all%}
+    <li>{{ participant.username }}
+    {%endfor%}
+</ul>
+
+<br>
+
 <p> 
     <a href="{%url 'edit' meeting.id%}">Edit this meeting</a><br>
     <a href="{%url 'delete' meeting.id%}">Delete this meeting</a><br>
