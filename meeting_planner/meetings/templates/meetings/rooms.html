@@ -3,13 +3,16 @@
 {% block title%}Rooms list{%endblock%}
 
 {% block content%}
-    <h1>Rooms list</h1>
+<h1>Rooms list</h1>
 
-    <ul>
-        {% for room in rooms %}
-        <li>
-            {{room}}
-        </li>
-        {% endfor %}
-    </ul>
+<ul>
+    {% for room in rooms %}
+    <li>
+        {{room}}
+    </li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'welcome' %}">Go home</a>
+
 {%endblock%}
