@@ -8,16 +8,24 @@
 </head>
 
 <body>
-    {% if user.is_authenticated %}
-        Logged in as: {{user.get_username}}
-        <form method="post" action="{%url 'logout'%}">
-            {% csrf_token %}
-            <button type="submit">Logout</button>
-        </form>
-    {%else %}
-        <a href="{% url 'login'%}">Login</a>
+    <div class="login">
+        {% if user.is_authenticated %}
+            <div class="name"> 
+                <img scr="{% static "website/profile.jpg" %}" id="profile">
+                Logged in as: {{user.get_username}}
+            </div>
+            <form method="post" action="{%url 'logout'%}">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+            </form>
+        {%else %}
+            <a href="{% url 'login'%}" class="login">Login</a>
     {%endif%}
+    </div>
+
+    <div class="body">
     {% block content %}
     {% endblock%}
+    </div>
 </body>
 </html>
