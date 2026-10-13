@@ -5,13 +5,13 @@
 {% if form.errors %}
     <p>Your username and password didn't match. Please try again.</p>
 {% endif %}
-
-<form method="post">
+<form method="post" class="form">
+    <h1>Login to your account</h1>
     <table>
         {{form}}
     </table>
     {% csrf_token %}
-    <input type="submit" value="login">
+    <input type="submit" value="Login">
 </form>
 
 

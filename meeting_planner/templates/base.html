@@ -11,7 +11,7 @@
     <div class="login">
         {% if user.is_authenticated %}
             <div class="name"> 
-                <img scr="{% static "website/profile.jpg" %}" id="profile">
+                <img src="{% static "website/profile.jpg" %}" id="profile">
                 Logged in as: {{user.get_username}}
             </div>
             <form method="post" action="{%url 'logout'%}">
