@@ -4,14 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</Title>
-    <link rel="stylesheet" href="{% static "website/style.css" %}">
+    <link rel="stylesheet" href="{% static 'website/style.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'website/icon.png' %}">
 </head>
 
 <body>
     <div class="login">
         {% if user.is_authenticated %}
             <div class="name"> 
-                <img src="{% static "website/profile.jpg" %}" id="profile">
+                <img src="{% static 'website/profile.jpg' %}" id="profile">
                 Logged in as: {{user.get_username}}
             </div>
             <form method="post" action="{%url 'logout'%}">

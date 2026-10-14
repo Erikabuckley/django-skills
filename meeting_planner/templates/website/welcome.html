@@ -1,24 +1,25 @@
 {% extends "base.html" %}
 {% block title%}Welcome{%endblock%}
 {% block content%}
-<h1>Welcome to the Meeting Planner!</h1>
+    <h1>Welcome to the Meeting Planner!</h1>
 
- {% if user.is_authenticated %}
-    <div class="meetings">
-        <h2>Your Meetings</h2>
-        <ul>
-            {% for meeting in meetings %}
-            <li>
-                Meeting: <a href="{% url 'detail' meeting.id %}">
-                    {{meeting.title}}
-                </a>
-            </li>
-            {% endfor %}
-        </ul>
-    <div>
-    <div class="rooms">
-        <a href="{%url 'rooms'%}">View rooms in the building</a>
-    </div>
-{% endif%}
+    {% if user.is_authenticated %}
+        <div class="meetings">
+            <h2>Your Meetings</h2>
+            <ul>
+                {% for meeting in meetings %}
+                    <li>
+                        Meeting: <a href="{% url 'detail' meeting.id %}">
+                            {{meeting.title}}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <div class="rooms">
+            <a href="{%url 'rooms'%}">View rooms in the building</a>
+        </div>
+    {% endif %}
 
 {%endblock%}

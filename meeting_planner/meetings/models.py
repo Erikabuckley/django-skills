@@ -8,7 +8,7 @@ class Room(models.Model):
     room_number = models.IntegerField()
     
     def __str__(self):
-        return f"{self.name}: room  {self.room_number} on floor {self.floor}"
+        return f"{self.name}(room  {self.room_number} on floor {self.floor})"
 
 #table in db has to inherit from the models superclass
 class Meeting(models.Model):
