@@ -4,16 +4,18 @@
 <h1>Welcome to the Meeting Planner!</h1>
 
  {% if user.is_authenticated %}
-    <h2>Current Meetings</h2>
-    <ul>
-        {% for meeting in meetings %}
-        <li>
-            <a href="{% url 'detail' meeting.id %}">
-                {{meeting.title}}
-            </a>
-        </li>
-        {% endfor %}
-    </ul>
+    <div class="meetings">
+        <h2>Your Meetings</h2>
+        <ul>
+            {% for meeting in meetings %}
+            <li>
+                Meeting: <a href="{% url 'detail' meeting.id %}">
+                    {{meeting.title}}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    <div>
     <div class="rooms">
         <a href="{%url 'rooms'%}">View rooms in the building</a>
     </div>
