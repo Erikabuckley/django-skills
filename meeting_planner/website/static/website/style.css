@@ -116,7 +116,10 @@ p{
     background-color: floralwhite;
     color: var(--main);
     border-radius: 10px;
-    text-align: center;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 #main-title{
@@ -129,4 +132,28 @@ p{
     color: var(--main);
     border-radius: 10px;
     text-align: center;
+}
+
+#info{
+    display: flex;
+    flex-direction: column;
+}
+
+.temp-circle{
+    position: relative;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+}
+#temp{
+    position: relative;
+    z-index: 2;
+}
+#circle{
+    position: absolute;
+    z-index: 1;
+    top:0;
+    left: 0;
 }

@@ -13,15 +13,22 @@
                             </a></p>
                     {% endfor %}
                 </ul>
+                <p style="padding:1rem;">Click the meeting for more info</p>
             </div>
 
             
             <div id="info">
                 <h2>Todays information</h2>
-                <div id="date">Date</div>
-                <div id="location">Could not be found</div>
-                <div id="temp">Could not be found </div>
-                <div id="weather">Could not be found</div>
+                <div id="date"></div>
+                <div id="location"></div>
+                <div class = temp-circle>
+                    <div id="temp"></div>
+                    <svg id="circle">
+                        <circle id="fail-value" r="40" cx="50" cy="50" stroke="grey" fill="none" stroke-width="5" stroke-linecap="round" stroke-dasharray="75% 25%" stroke-dashoffset="-39.25%"></circle>
+                        <circle id="success-value" r="40" cx="50" cy="50" stroke="rgb(0,0,240)" fill="none" stroke-width="5" stroke-linecap="round" stroke-dasharray="60% 40%" stroke-dashoffset="-39.25%"></circle>
+                    </svg>
+                </div>
+                <div id="weather"></div>
             </div>
         </div>
         
