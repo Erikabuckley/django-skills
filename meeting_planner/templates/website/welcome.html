@@ -35,6 +35,10 @@
         <div class="item rooms">
             <a href="{%url 'rooms'%}">View rooms in the building</a>
         </div>
-    {% endif %}
+    {%else%}
+        <div class="item">
+            <p>Please login to your account to see current meetings</p>
+        </div>
+    {%endif%}
 
 {%endblock%}
