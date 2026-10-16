@@ -1,14 +1,20 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block extra_scripts %}
+    <script defer src="{% static 'website/rooms.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'website/rooms.css' %}">
+{% endblock %}
 
 {% block title%}Rooms list{%endblock%}
 
 {% block content%}
-    <h1>Rooms list</h1>
+    <h1>Rooms and floor plan</h1>
+    <p id="selectedroom">Selected room</p>
 
     <div class="card">
         <div class="item rooms">
+            <h2>Rooms in the building</h2>
             {% for room in rooms %}
                 <p>{{room}}</p>
             {% endfor %}
@@ -19,30 +25,12 @@
                 class="floorplan-overlay"
                 viewBox="0 0 564 476"
                 xmlns="http://www.w3.org/2000/svg">
-
-                <a href="" title="room1">
-                    <rect class="room" x="20" y="300" width="130" height="133" />
-                </a>
-
-                <a href="" title="room2">
-                    <rect class="room" x="156" y="300" width="130" height="133" />
-                </a>
-
-                <a href="" title="room3">
-                    <rect class="room" x="296" y="300" width="130" height="133" />
-                </a>
-
-                <a href="" title="room4">
-                    <rect class="room" x="17" y="15" width="210" height="147" />
-                </a>
-
-                <a href="" title="room5">
-                    <rect class="room" x="230" y="15" width="314" height="207" />
-                </a>
-
-                <a href="" title="room6">
-                    <rect class="room" x="425" y="300" width="110" height="133" />
-                </a>
+                <rect class="room" id="Room 1" x="20" y="300" width="130" height="133" />
+                <rect class="room" id="Room 2" x="156" y="300" width="130" height="133" />
+                <rect class="room" id="Room 3" x="296" y="300" width="130" height="133" />
+                <rect class="room" id="Room 4" x="17" y="15" width="210" height="147" />
+                <rect class="room" id="Room 5" x="230" y="15" width="314" height="207" />
+                <rect class="room" id="Room 6" x="425" y="300" width="110" height="133" />
             </svg>
         </div>
     </div>

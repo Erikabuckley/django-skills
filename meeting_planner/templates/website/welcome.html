@@ -1,5 +1,13 @@
 {% extends "base.html" %}
 {% block title%}Welcome{%endblock%}
+
+{%load static%}
+
+{% block extra_scripts %}
+    <script defer src="{% static 'website/welcome.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'website/welcome.css' %}">
+{% endblock %}
+
 {% block content%}
     <h1>Welcome to the Meeting Planner!</h1>
 
@@ -18,7 +26,7 @@
 
             
             <div class="item">
-                <h2>Todays information</h2>
+                <h2>Todays Information</h2>
                 <div id="date"></div>
                 <div id="location"></div>
                 <div class = temp-circle>
@@ -30,15 +38,37 @@
                 </div>
                 <div id="weather"></div>
             </div>
+
+            <div class="item">
+                <h2>Rooms List</h2>
+                <img src="{% static 'website/floorplan.png' %}" width="100" height="100">
+                <br><br>
+                <a href="{%url 'rooms'%}">Click here to view the rooms in the building</a>
+            </div>
         </div>
         
-        <div class="item rooms">
-            <a href="{%url 'rooms'%}">View rooms in the building</a>
-        </div>
+
     {%else%}
-        <div class="item">
-            <p>Please login to your account to see current meetings</p>
+        <div class="card">
+            <div class="item">
+                <h2>View your meetings</h2>
+                <img src="{% static 'website/icon.png' %}" width="150" height="150">
+            </div>
+            <div class="item">
+                <h2>Look at meeting rooms</h2>
+                <img src="{% static 'website/floorplan.png' %}" width="150" height="150">
+
+            </div>
+            <div class="item">
+                <h2>Plan ahead</h2>
+                <img src="{% static 'website/plan.png' %}" width="150" height="150">
+            </div>
         </div>
+
+        <div class="item" id="notice">
+            <h2 >Please login to your account to see current meetings</h2>
+        </div>
+
     {%endif%}
 
 {%endblock%}

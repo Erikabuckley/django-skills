@@ -1,0 +1,31 @@
+/*#######################welcome.html#############################*/
+
+#main-text{
+    display: flex;
+    flex-direction: row;
+    gap: 5rem;
+    padding: 1rem;
+}
+
+.temp-circle{
+    position: relative;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+}
+#temp{
+    position: relative;
+    z-index: 2;
+}
+#circle{
+    position: absolute;
+    z-index: 1;
+    top:0;
+    left: 0;
+}
+
+#notice{
+    margin-top: auto;
+}

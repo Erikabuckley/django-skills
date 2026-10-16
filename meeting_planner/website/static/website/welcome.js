@@ -99,3 +99,15 @@ function getTempColour(temp) {
 
     return `rgb(${r}, ${g}, ${b})`;
 }
+
+
+text = document.getElementById("selectedroom");
+
+document.querySelectorAll(".room").forEach((room) => {
+    room.addEventListener("mouseover", (event) => {
+        const id = event.currentTarget.id;
+        console.log
+        text.textContent = `Current room is" ${id}`;
+        
+    });
+});

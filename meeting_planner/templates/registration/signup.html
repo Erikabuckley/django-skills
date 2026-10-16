@@ -1,4 +1,9 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block extra_scripts %}
+    <link rel="stylesheet" href="{% static 'website/auth.css' %}">
+{% endblock %}
 
 {% block content%}
 
