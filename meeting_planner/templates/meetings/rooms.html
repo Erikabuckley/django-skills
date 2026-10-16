@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% load static %}
+
 
 {% block title%}Rooms list{%endblock%}
 
@@ -10,6 +12,9 @@
             {% for room in rooms %}
                 <p>{{room}}</p>
             {% endfor %}
+        </div>
+        <div class="item">
+            <img src="{% static 'website/floorplan.png' %}" id="floorplan">
         </div>
     </div>
 
