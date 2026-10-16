@@ -8,16 +8,47 @@
     <h1>Rooms list</h1>
 
     <div class="card">
-        <div class="item">
+        <div class="item rooms">
             {% for room in rooms %}
                 <p>{{room}}</p>
             {% endfor %}
         </div>
-        <div class="item">
+        <div class="item floorplan">
             <img src="{% static 'website/floorplan.png' %}" id="floorplan">
+            <svg
+                class="floorplan-overlay"
+                viewBox="0 0 564 476"
+                xmlns="http://www.w3.org/2000/svg">
+
+                <a href="" title="room1">
+                    <rect class="room" x="20" y="300" width="130" height="133" />
+                </a>
+
+                <a href="" title="room2">
+                    <rect class="room" x="156" y="300" width="130" height="133" />
+                </a>
+
+                <a href="" title="room3">
+                    <rect class="room" x="296" y="300" width="130" height="133" />
+                </a>
+
+                <a href="" title="room4">
+                    <rect class="room" x="17" y="15" width="210" height="147" />
+                </a>
+
+                <a href="" title="room5">
+                    <rect class="room" x="230" y="15" width="314" height="207" />
+                </a>
+
+                <a href="" title="room6">
+                    <rect class="room" x="425" y="300" width="110" height="133" />
+                </a>
+            </svg>
         </div>
     </div>
 
     <p class="actions"><a href="{% url 'welcome' %}">Go home</a></p>
+
+
 
 {%endblock%}

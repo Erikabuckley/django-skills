@@ -173,8 +173,34 @@ input{
 }
 
 
-/*roomss######################*/
+/*############################roomss######################*/
+.floorplan{
+    position:relative;
+    width: 100%;
+}
 #floorplan{
-    width: 300px;
-    height: 300px;
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.floorplan-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.room {
+    fill: rgba(70, 131, 193, 0.1);
+    transition: fill 0.2s ease;
+    cursor: pointer;
+}
+
+.room:hover {
+    fill: rgba(3, 3, 3, 0.1);
+}
+
+.rooms p{
+    width: max-content;
 }
