@@ -133,22 +133,22 @@ LOGOUT_REDIRECT_URL = "/"
 LOGIN_URL = "/auth/login"
 
 #dont put this in prod
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
     
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-        }
-    },
-    'loggers': {
-        'django.db.backends': {
-            'level': 'DEBUG',
-        }
-    },
-    "root":{
-        "handlers": ["console"],
-        "level": "WARNING"
-    },
-}
+#     'handlers': {
+#         'console': {
+#             'class': 'logging.StreamHandler',
+#         }
+#     },
+#     'loggers': {
+#         'django.db.backends': {
+#             'level': 'DEBUG',
+#         }
+#     },
+#     "root":{
+#         "handlers": ["console"],
+#         "level": "WARNING"
+#     },
+# }

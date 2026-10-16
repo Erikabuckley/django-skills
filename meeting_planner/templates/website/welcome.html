@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% block title%}Welcome{%endblock%}
 {% block content%}
-    <h1 id="main-title">Welcome to the Meeting Planner!</h1>
+    <h1>Welcome to the Meeting Planner!</h1>
 
     {% if user.is_authenticated %}
         <div id="main-text">
-            <div class="meetings">
+            <div class="item meetings">
                 <h2>Your Meetings</h2>
                     {% for meeting in meetings %}
                             <p>Meeting: <a href="{% url 'detail' meeting.id %}">
@@ -17,7 +17,7 @@
             </div>
 
             
-            <div id="info">
+            <div class="item">
                 <h2>Todays information</h2>
                 <div id="date"></div>
                 <div id="location"></div>
@@ -32,7 +32,7 @@
             </div>
         </div>
         
-        <div class="rooms">
+        <div class="item rooms">
             <a href="{%url 'rooms'%}">View rooms in the building</a>
         </div>
     {% endif %}

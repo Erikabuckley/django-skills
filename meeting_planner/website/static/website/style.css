@@ -25,12 +25,9 @@ li {
     list-style-type: none;
 }
 
-.login {
-    justify-content: space-between;
-    display: flex;
-    flex-direction: row;
-    padding: 10px;
-    align-items: center;
+
+h1{
+    padding: 1rem;
 }
 
 a{
@@ -42,23 +39,7 @@ p{
     margin: 0;
 }
 
-#profile {
-    height: 30px;
-    width: 30px;
-    padding: 10px;
-}
 
-.name {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
 
 .actions {
     display: flex;
@@ -89,54 +70,32 @@ p{
     border-radius: 10px;
 }
 
-.meeting-card {
+.card {
     display: flex;
     flex-direction: row;
     color: var(--main);
     gap: 1rem;
+    padding :1rem;
 }
 
 .item{
-    background-color: floralwhite;
-    display: flex;
-    flex-direction: column;
-    padding: 2rem;
-    border-radius: 10px;
-}
-
-#main-text{
-    display: flex;
-    flex-direction: row;
-    gap: 5rem;
-    padding: 1rem;
-}
-
-#main-text > div{
     padding: 1rem 2rem;
     background-color: floralwhite;
     color: var(--main);
     border-radius: 10px;
     display:flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 }
 
-#main-title{
-    padding: 1rem;
-}
 
-.rooms{
-    padding: 1rem 2rem;
-    background-color: floralwhite;
-    color: var(--main);
-    border-radius: 10px;
-    text-align: center;
-}
+/*#######################welcome.html#############################*/
 
-#info{
+#main-text{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    gap: 5rem;
+    padding: 1rem;
 }
 
 .temp-circle{
@@ -156,4 +115,32 @@ p{
     z-index: 1;
     top:0;
     left: 0;
+}
+
+/*#######################login.html#############################*/
+
+
+.login {
+    justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    align-items: center;
+}
+.name {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#profile {
+    height: 30px;
+    width: 30px;
+    padding: 10px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

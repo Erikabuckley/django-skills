@@ -5,29 +5,25 @@
 {% block content%}
 <h1>{{meeting.title}}</h1>
 
-<div class="meeting-card">
+<div class="card">
 
     <div class="item meeting-info">
         <h2>Information</h2>
-        <ul>
-            <li>Date: {{meeting.date}}</li>
-            <li>Time: {{meeting.start_time}} </li>
-            <li>Location: {{meeting.room}}</li>
-        </ul>
+        <p>Date: {{meeting.date}}</p>
+        <p>Time: {{meeting.start_time}} </p>
+        <p>Location: {{meeting.room}}</p>
     </div>
 
     <div class="item meeting-participants">
         <h2>Participants</h2>
-        <ul>
-            {% for participant in meeting.participants.all%}
-            <li>{{ participant.username }}</li>
-            {%endfor%}
-        </ul>
+        {% for participant in meeting.participants.all%}
+            <p>{{ participant.username }}</p>
+        {%endfor%}
     </div>
 
 </div>
 
-<div class="meeting-actions">
+<div>
     <p class="actions"> 
         <a href="{%url 'edit' meeting.id%}">Edit this meeting</a><br>
         <a href="{%url 'delete' meeting.id%}">Delete this meeting</a><br>
