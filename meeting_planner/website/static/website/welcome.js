@@ -2,17 +2,16 @@ date = new Date().toLocaleDateString()
 document.getElementById("date").textContent = date
 
 
-navigator.geolocation.getCurrentPosition(showPosition, showError), {enableHighAccuracy: false,};
+navigator.geolocation.getCurrentPosition(showPosition, showError, {enableHighAccuracy: false,});
 
 async function showPosition(position) {
   const lat = position.coords.latitude;
   const lon = position.coords.longitude;
-  const API_KEY = 'abbe1799e6459da348fad1d745160b1a';
-
-  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
 
   try {
-    const weather = await getWeather(url);
+
+
+    const weather = await getWeather(lat, lon);
 
     document.getElementById("location").textContent =
       `Location: ${weather.name}`;
@@ -39,16 +38,14 @@ function showError(error) {
     `Unable to retrieve location: ${error.message}`;
 }
 
-async function getWeather(url) {
-  const response = await fetch(url);
-
-  if (!response.ok) {
-    const message = await response.text();
-
-    throw new Error(
-      `Weather API request failed (${response.status}): ${message}`
+async function getWeather(lat, lon) {
+    const response = await fetch(
+        `/api/meeting-data/?lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lon)}`
     );
-  }
+
+    if (!response.ok) {
+        throw new Error("Failed to load meeting data");
+    }
 
   return response.json();
 }
@@ -99,15 +96,3 @@ function getTempColour(temp) {
 
     return `rgb(${r}, ${g}, ${b})`;
 }
-
-
-text = document.getElementById("selectedroom");
-
-document.querySelectorAll(".room").forEach((room) => {
-    room.addEventListener("mouseover", (event) => {
-        const id = event.currentTarget.id;
-        console.log
-        text.textContent = `Current room is" ${id}`;
-        
-    });
-});

@@ -12,13 +12,13 @@
     <h1>Welcome to the Meeting Planner!</h1>
 
     {% if user.is_authenticated %}
-        <div id="main-text">
+        <div class="card">
             <div class="item meetings">
                 <h2>Your Meetings</h2>
                     {% for meeting in meetings %}
-                            <p>Meeting: <a href="{% url 'detail' meeting.id %}">
-                                {{meeting.title}}
-                            </a></p>
+                        <p>Meeting: <a href="{% url 'detail' meeting.id %}">
+                            {{meeting.title}}
+                        </a></p>
                     {% endfor %}
                 </ul>
                 <p style="padding:1rem;">Click the meeting for more info</p>
