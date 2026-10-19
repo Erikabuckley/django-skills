@@ -31,6 +31,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['django-skills.onrender.com']
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://meeting-planner.onrender.com",
+]
 
 # Application definition
 
