@@ -16,20 +16,16 @@ function drawClock() {
 }
 
 function drawFace(ctx, radius) {
-  const grad = ctx.createRadialGradient(0,0,radius*0.95, 0,0,radius*1.05);
-  grad.addColorStop(0, '#333');
-  grad.addColorStop(0.5, 'white');
-  grad.addColorStop(1, '#333');
   ctx.beginPath();
   ctx.arc(0, 0, radius, 0, 2*Math.PI);
   ctx.fillStyle = 'white';
   ctx.fill();
-  ctx.strokeStyle = grad;
-  ctx.lineWidth = radius*0.1;
+  ctx.strokeStyle = 'grey';
+  ctx.lineWidth = radius*0.05;
   ctx.stroke();
   ctx.beginPath();
-  ctx.arc(0, 0, radius*0.1, 0, 2*Math.PI);
-  ctx.fillStyle = '#333';
+  ctx.arc(0, 0, radius*0.05, 0, 2*Math.PI);
+  ctx.fillStyle = 'grey';
   ctx.fill();
 }
 
@@ -62,7 +58,7 @@ function drawTime(ctx, radius){
     drawHand(ctx, hour, radius*0.5, radius*0.07);
     //minute
     minute=(minute*Math.PI/30)+(second*Math.PI/(30*60));
-    drawHand(ctx, minute, radius*0.8, radius*0.07);
+    drawHand(ctx, minute, radius*0.8, radius*0.04);
     // second
     second=(second*Math.PI/30);
     drawHand(ctx, second, radius*0.9, radius*0.02);
@@ -78,11 +74,6 @@ function drawHand(ctx, pos, length, width) {
     ctx.stroke();
     ctx.rotate(-pos);
 }
-
-
-
-
-
 
 date = new Date().toLocaleDateString()
 document.getElementById("date").textContent = date
