@@ -29,11 +29,11 @@ SECRET_KEY = "django-insecure-ow2p3-w6o_y3%nh$oba#c&k_=)!3qp71=ile%h&3#=fqgxui#c
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['django-skills.onrender.com']
+ALLOWED_HOSTS = ['django-skills.onrender.com','localhost']
 
 CSRF_TRUSTED_ORIGINS = [
     "https://meeting-planner.onrender.com",
-]
+    "http://localhost:8000"]
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
@@ -140,24 +140,3 @@ MAILERS = {
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 LOGIN_URL = "/auth/login"
-
-#dont put this in prod
-# LOGGING = {
-#     'version': 1,
-#     'disable_existing_loggers': False,
-    
-#     'handlers': {
-#         'console': {
-#             'class': 'logging.StreamHandler',
-#         }
-#     },
-#     'loggers': {
-#         'django.db.backends': {
-#             'level': 'DEBUG',
-#         }
-#     },
-#     "root":{
-#         "handlers": ["console"],
-#         "level": "WARNING"
-#     },
-# }

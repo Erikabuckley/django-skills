@@ -11,7 +11,7 @@ from meetings.models import Meeting
 
 def welcome(request):
     if request.user.is_authenticated:
-        context =  {"meetings": Meeting.objects.all()}
+        context =  {"meetings": Meeting.objects.filter(participants__id=request.user.id)}# gets only for that user
     else:
         context = {}
     return render(request, "website/welcome.html",context)#dictionary is passed to the template
