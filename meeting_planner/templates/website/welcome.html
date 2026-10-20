@@ -14,7 +14,15 @@
     {% if user.is_authenticated %}
         <div class="card">
             <div class="item meetings">
-                <h2>Your Meetings</h2>
+                <h2>Next Meeting</h2>
+                        <p> {{ nextmeeting.title }}</p>
+                        <p> {{ nextmeeting.date }}</p>
+                </ul>
+            </div>
+        </div>
+        <div class="card">
+            <div class="item meetings">
+                <h2>Upcoming Meetings</h2>
                     {% for meeting in meetings %}
                         <p>Meeting: <a href="{% url 'detail' meeting.id %}">
                             {{meeting.title}}
@@ -38,6 +46,11 @@
                 </div>
                 <p id="weather"></p>
             </div>
+
+            <div class="item">
+                <h2>Time</h2>
+                <canvas id="canvas" width="200" height="200" ></canvas>
+            </div>
         </div>
         <div class="card">
 
@@ -45,13 +58,27 @@
                 <h2>Rooms List</h2>
                 <a href="{%url 'rooms'%}"><img src="{% static 'website/floorplan.png' %}" width="150" height="150"></a>
                 <br><br>
-                <p style=" margin-top:auto;">Click to view the rooms in the building</a></p>
+                <p style=" margin-top:auto;">Click floorplan to view the rooms</a></p>
+            </div>
+
+            <div class="item meetings">
+                <h2>Past Meetings</h2>
+                    {% for meeting in meetings %}
+                        <p>Meeting: <a href="{% url 'detail' meeting.id %}">
+                            {{meeting.title}}
+                        </a></p>
+                    {% endfor %}
+                </ul>
+                <p style=" margin-top:auto;">Click the meeting for more info</p>
             </div>
 
             <div class="item">
-                <h2>Time</h2>
-                <canvas id="canvas" width="200" height="200" ></canvas>
+                <h2>Riddle of the Day</h2>
+                <p id="riddle"></p>
+                <p id="answer"></p>
+                <button id="reveal"> Click to reveal</button>
             </div>
+
         </div>
         
 

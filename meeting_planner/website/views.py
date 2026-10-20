@@ -12,6 +12,7 @@ from meetings.models import Meeting
 def welcome(request):
     if request.user.is_authenticated:
         context =  {"meetings": Meeting.objects.filter(participants__id=request.user.id)}# gets only for that user
+        context
     else:
         context = {}
     return render(request, "website/welcome.html",context)#dictionary is passed to the template
@@ -47,5 +48,34 @@ def get_meeting_data(request):
     except requests.RequestException:
         return JsonResponse(
             {"error": "Could not retrieve meeting data"},
+            status=502,
+        )
+
+@require_GET
+@never_cache
+def get_riddle(request):
+    api_key = os.getenv("RIDDLE_KEY")
+
+    if not api_key:
+        return JsonResponse(
+            {"error": "API key is not configured"},
+            status=500,
+        )
+
+    try:
+        response = requests.get(
+                    "https://api.apileague.com/retrieve-random-riddle?difficulty=easy",
+                    headers={
+                        "x-api-key": api_key,
+                    },
+                    timeout=10,
+                    )
+        response.raise_for_status()
+
+        return JsonResponse(response.json(), safe=False)
+
+    except requests.RequestException:
+        return JsonResponse(
+            {"error": "Could not retrieve riddle"},
             status=502,
         )

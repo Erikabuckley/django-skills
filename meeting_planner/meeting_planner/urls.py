@@ -18,7 +18,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from website.views import welcome, get_meeting_data
+from website.views import welcome, get_meeting_data, get_riddle
 
 #we add names to enable us e to maintain url mappings easier
 urlpatterns = [
@@ -26,5 +26,6 @@ urlpatterns = [
     path('', welcome, name="welcome"),
     path('meetings/',include('meetings.urls')),
     path('auth/', include('django.contrib.auth.urls')),
-    path("api/meeting-data/", get_meeting_data, name="meeting_data")
+    path("api/meeting-data/", get_meeting_data, name="meeting_data"),
+    path("api/riddle-data/", get_riddle, name="riddle_data")
 ]

@@ -29,3 +29,15 @@
 #notice{
     margin-top: auto;
 }
+
+#answer{
+    display: none;
+    padding: 1rem;
+    font-weight: bold;
+}
+
+#reveal{
+    background-color: var(--main);
+    color: var(--light);
+    margin-top: auto;
+}

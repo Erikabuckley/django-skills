@@ -173,3 +173,38 @@ function getTempColour(temp) {
 
     return `rgb(${r}, ${g}, ${b})`;
 }
+
+showRiddle();
+
+async function showRiddle() {
+  try {
+    const riddle = await getRiddle();
+
+    document.getElementById("riddle").textContent =
+      `${riddle.riddle}`;    
+      
+      document.getElementById("answer").textContent =
+      `${riddle.answer}`;
+  } catch (error) {
+    document.getElementById("riddle").textContent =
+      `Error fetching riddle: ${error.message}`;
+  }
+}
+
+async function getRiddle() {
+    const response = await fetch(
+        `/api/riddle-data/`
+    );
+
+    if (!response.ok) {
+        throw new Error("Failed to load riddle data");
+    }
+
+  return response.json();
+}
+
+
+b = document.getElementById('reveal')
+b.addEventListener("click", () => {
+  document.getElementById('answer').style.display = 'block'
+});
