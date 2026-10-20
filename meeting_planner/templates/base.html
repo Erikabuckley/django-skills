@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</Title>
     <link rel="stylesheet" href="{% static 'website/style.css' %}">
+    <script defer src="{% static 'website/base.js' %}"></script>
     <link rel="icon" type="image/x-icon" href="{% static 'website/icon.png' %}">
 </head>
 
@@ -29,6 +30,16 @@
     <div class="content">
     {% block content %}
     {% endblock%}
+
+    
     </div>
+    <div id="footer">
+        Contrast:
+        <label class="switch">
+            <input type="checkbox" id="darklight">
+            <span class="slider round"></span>
+        </label>
+    </div>
+
 </body>
 </html>
