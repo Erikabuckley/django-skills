@@ -8,7 +8,7 @@
     {% csrf_token %}
     <p> Are you sure you want to delete this meeting</p>
     <div>
-        <button type="submit">Yes</button>
+        <button type="submit" class="in-button">Yes</button>
         <a href="{% url 'detail' meeting.id %}">No, take me back</a>
     </div>
 

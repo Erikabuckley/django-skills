@@ -14,9 +14,7 @@
     {% if user.is_authenticated %}
         <div class="card">
             <div class="item meetings">
-                <h2>Next Meeting</h2>
-                        <p> {{ nextmeeting.title }}</p>
-                        <p> {{ nextmeeting.date }}</p>
+                <h2>Next Meeting: {{ nextmeeting.title }} on {{ nextmeeting.date }}</h2>
                 </ul>
             </div>
         </div>
@@ -24,15 +22,13 @@
             <div class="item meetings">
                 <h2>Upcoming Meetings</h2>
                     {% for meeting in meetings %}
-                        <p>Meeting: <a href="{% url 'detail' meeting.id %}">
+                        <p><a href="{% url 'detail' meeting.id %}">
                             {{meeting.title}}
-                        </a></p>
+                        </a>{{meeting.date}}</p>
                     {% endfor %}
-                </ul>
-                <p style=" margin-top:auto;">Click the meeting for more info</p>
+                <p class="in-actions" style="margin-top:auto"><a id="book" href="{% url 'new' %}">Book meeting</a></p>
             </div>
 
-            
             <div class="item">
                 <h2>Todays Information</h2>
                 <p id="date"></p>
@@ -63,8 +59,8 @@
 
             <div class="item meetings">
                 <h2>Past Meetings</h2>
-                    {% for meeting in meetings %}
-                        <p>Meeting: <a href="{% url 'detail' meeting.id %}">
+                    {% for meeting in pastmeetings %}
+                        <p><a href="{% url 'detail' meeting.id %}">
                             {{meeting.title}}
                         </a></p>
                     {% endfor %}
@@ -76,7 +72,7 @@
                 <h2>Riddle of the Day</h2>
                 <p id="riddle"></p>
                 <p id="answer"></p>
-                <button id="reveal"> Click to reveal</button>
+                <button id="reveal" class="in-button"> Click to reveal</button>
             </div>
 
         </div>

@@ -1,5 +1,6 @@
 :root {
     --main: #014e3c;
+    --button: #cfe0d0;
     --light: floralwhite;
     --dark: #206c5e;
 
@@ -23,6 +24,7 @@ button {
 button:hover {
     background-color: rgb(233, 231, 229);
     cursor: pointer;
+    color:black;
 }
 
 li {
@@ -36,7 +38,8 @@ h1{
 
 a{
     text-decoration: none;
-    color: #000806;
+    font-weight: bold;
+    color: var(--main);
 }
 
 p{
@@ -56,11 +59,13 @@ input{
 }
 
 .actions a {
-    padding: 10px;
     margin: 5px;
     background-color: var(--light);
     color: var(--main);
     border-radius: 10px;
+    padding: 5px 20px;
+    font-size: 20px;
+    font-weight: normal;
 
 }
 
@@ -96,6 +101,22 @@ input{
     flex-direction: column;
     align-items: center;
 }
+
+.in-button{
+    background-color: var(--main);
+    color: var(--light);
+    margin-top: auto;
+}
+
+.in-actions a{
+    background-color: var(--main);
+    color: var(--light);
+    border-radius: 10px;
+    padding: 5px 20px;
+    font-size: 20px;
+    font-weight: normal;
+}
+
 
 /*######################dark mode ##############################*/
 

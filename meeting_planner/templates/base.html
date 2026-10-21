@@ -23,8 +23,10 @@
                 <button type="submit">Logout</button>
             </form>
         {%else %}
-            <p class="actions" id="login-button"><a href="{% url 'login'%}" >Login</a></p>
-    {%endif%}
+            <form method="get" action="{% url 'login' %}" style="margin-left: auto;">
+                <button type="submit">Login</button>
+            </form>    
+        {%endif%}
     </div>
 
     <div class="content">

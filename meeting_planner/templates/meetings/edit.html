@@ -9,7 +9,13 @@
         {{form}}
     </table>
     {% csrf_token %}
-    <button type="submit">Confirm changes</button>
+    <button type="submit" class="in-button">Confirm changes</button>
 </form>
 
+
+<div>
+    <p class="actions"> 
+        <a href="{% url 'welcome' %}">Go home</a>
+    </p>
+</div>
 {%endblock%}

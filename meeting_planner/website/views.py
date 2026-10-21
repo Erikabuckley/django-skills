@@ -4,6 +4,7 @@ from django.shortcuts import render
 import os
 
 from django.http import JsonResponse
+from django.utils import timezone
 from django.views.decorators.http import require_GET
 from django.views.decorators.cache import never_cache
 
@@ -11,12 +12,24 @@ from meetings.models import Meeting
 
 def welcome(request):
     if request.user.is_authenticated:
-        context =  {"meetings": Meeting.objects.filter(participants__id=request.user.id)}# gets only for that user
-        context
+        context = {
+            "meetings": Meeting.objects.filter(
+                participants__id=request.user.id,
+                date__gt=timezone.now()
+            ),
+            "nextmeeting": Meeting.objects.filter(
+                participants__id=request.user.id,
+                date__gt=timezone.now()
+            ).order_by('date').first(),
+            "pastmeetings": Meeting.objects.filter(
+                participants__id=request.user.id,
+                date__lt=timezone.now()
+            ).order_by('-date')
+        }
+
     else:
         context = {}
     return render(request, "website/welcome.html",context)#dictionary is passed to the template
-
 
 @require_GET
 @never_cache
@@ -64,7 +77,7 @@ def get_riddle(request):
 
     try:
         response = requests.get(
-                    "https://api.apileague.com/retrieve-random-riddle?difficulty=easy",
+                    "https://api.apileague.com/retrieve-random-riddle?difficulty=hard",
                     headers={
                         "x-api-key": api_key,
                     },
