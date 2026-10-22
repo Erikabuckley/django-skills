@@ -16,17 +16,6 @@ A web-based meeting planning application built with Django. The application prov
 - **Riddle of the Day:** Provides a daily riddle for users to solve.
 - **Authentication:** Supports user login and access to authenticated features.
 
-## Built With
-
-- **Python** — Application programming language.
-- **Django** — Web framework and backend.
-- **HTML** — Page structure.
-- **CSS** — Styling and responsive layouts.
-- **JavaScript** — Interactive dashboard components.
-- **SQLite** — Database for storing application data.
-- **Docker** — Containerisation and application deployment.
-
-
 ## Getting Started
 
 ### Prerequisites
@@ -111,4 +100,7 @@ If using Docker directly, build the image with:
 docker build -t meeting-planner .
 ```
 
+```
+docker run --env-file .env -p 8000:8000 meeting-planner
+```
 The Docker configuration should install the dependencies, copy the project files, collect static files, and start the application.
