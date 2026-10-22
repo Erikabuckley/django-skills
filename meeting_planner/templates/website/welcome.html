@@ -9,7 +9,6 @@
 {% endblock %}
 
 {% block content%}
-    <h1>Welcome to the Meeting Planner!</h1>
 
     {% if user.is_authenticated %}
         <div class="card">
@@ -19,7 +18,7 @@
             </div>
         </div>
         <div class="card">
-            <div class="item meetings">
+            <div class="item dash meetings">
                 <h2>Upcoming Meetings</h2>
                     {% for meeting in meetings %}
                         <p><a href="{% url 'detail' meeting.id %}">
@@ -29,7 +28,7 @@
                 <p class="in-actions" style="margin-top:auto"><a id="book" href="{% url 'new' %}">Book meeting</a></p>
             </div>
 
-            <div class="item">
+            <div class="item dash">
                 <h2>Todays Information</h2>
                 <p id="date"></p>
                 <p id="location"></p>
@@ -43,21 +42,21 @@
                 <p id="weather"></p>
             </div>
 
-            <div class="item">
+            <div class="item dash">
                 <h2>Time</h2>
                 <canvas id="canvas" width="200" height="200" ></canvas>
             </div>
         </div>
-        <div class="card">
 
-            <div class="item">
+        <div class="card">
+            <div class="item dash">
                 <h2>Rooms List</h2>
                 <a href="{%url 'rooms'%}"><img src="{% static 'website/floorplan.png' %}" width="150" height="150"></a>
                 <br><br>
                 <p style=" margin-top:auto;">Click floorplan to view the rooms</a></p>
             </div>
 
-            <div class="item meetings">
+            <div class="item dash meetings">
                 <h2>Past Meetings</h2>
                     {% for meeting in pastmeetings %}
                         <p><a href="{% url 'detail' meeting.id %}">
@@ -68,17 +67,18 @@
                 <p style=" margin-top:auto;">Click the meeting for more info</p>
             </div>
 
-            <div class="item">
+            <div class="item dash">
                 <h2>Riddle of the Day</h2>
                 <p id="riddle"></p>
                 <p id="answer"></p>
                 <button id="reveal" class="in-button"> Click to reveal</button>
             </div>
-
         </div>
         
 
     {%else%}
+        <h1 style="margin:0">Welcome to the Meeting Planner!</h1>
+
         <div class="card">
             <div class="item">
                 <h2>View your meetings</h2>
@@ -94,10 +94,12 @@
                 <img src="{% static 'website/plan.png' %}" width="150" height="150">
             </div>
         </div>
-
-        <div class="item" id="notice">
-            <h2 >Please login to your account to see current meetings</h2>
+        <div class="card" style="margin-top:auto">
+            <div class="item" id="notice">
+                <h2 >Please login to your account to see current meetings</h2>
+            </div>
         </div>
+
 
     {%endif%}
 

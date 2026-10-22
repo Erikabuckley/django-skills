@@ -10,6 +10,9 @@ body {
     font-family: 'Calibri', 'Trebuchet MS', sans-serif;
     color: var(--light);
     background-color: var(--main);
+    margin: 0;
+    display:flex;
+    flex-direction: column;
 }
 
 button {
@@ -89,7 +92,7 @@ input{
     flex-direction: row;
     color: var(--main);
     gap: 1rem;
-    padding :1rem;
+    padding :0.5rem;
 }
 
 .item{
@@ -100,6 +103,10 @@ input{
     display:flex;
     flex-direction: column;
     align-items: center;
+}
+
+.dash{
+    flex:1;
 }
 
 .in-button{
@@ -117,6 +124,17 @@ input{
     font-weight: normal;
 }
 
+.in-actions a:hover {
+    background-color: rgb(233, 231, 229);
+    cursor: pointer;
+    color:black;
+}
+
+#footer{
+    padding: 1rem;
+    margin-top: auto;
+    align-items: center;
+}
 
 /*######################dark mode ##############################*/
 
@@ -202,14 +220,26 @@ input:checked + .slider:before {
 
 /*#######################base.html#############################*/
 
-
-.login {
-    justify-content: space-between;
-    display: flex;
-    flex-direction: row;
-    padding: 10px;
+.login{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 1rem;
     align-items: center;
 }
+
+.login > :first-child {
+    justify-self: start;
+}
+
+.login > :nth-child(2) {
+    justify-self: center;
+}
+
+.login > :last-child {
+    justify-self: end;
+}
+
+
 .name {
     display: flex;
     flex-direction: row;
