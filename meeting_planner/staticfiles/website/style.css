@@ -1,7 +1,7 @@
 :root {
     --main: #014e3c;
     --button: #cfe0d0;
-    --light: floralwhite;
+    --light: #fffaf0;
     --dark: #206c5e;
 
 }
@@ -13,6 +13,7 @@ body {
     margin: 0;
     display:flex;
     flex-direction: column;
+    min-height: 100dvh;
 }
 
 button {
@@ -130,10 +131,16 @@ input{
     color:black;
 }
 
-#footer{
+#mode{
     padding: 1rem;
-    margin-top: auto;
+    bottom: 0;
     align-items: center;
+    position: fixed;
+}
+
+#footer{
+    padding:1rem;
+
 }
 
 /*######################dark mode ##############################*/
@@ -220,22 +227,22 @@ input:checked + .slider:before {
 
 /*#######################base.html#############################*/
 
-.login{
+.header{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    padding: 1rem;
+    padding: 1.5rem;
     align-items: center;
 }
 
-.login > :first-child {
+.header > :first-child {
     justify-self: start;
 }
 
-.login > :nth-child(2) {
+.header > :nth-child(2) {
     justify-self: center;
 }
 
-.login > :last-child {
+.header > :last-child {
     justify-self: end;
 }
 
@@ -256,6 +263,9 @@ input:checked + .slider:before {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    height: 100%;
+    flex-grow: 1;
 }
 
 #login-button{
