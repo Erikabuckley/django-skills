@@ -13,9 +13,9 @@
 {% block extra_scripts %}{% endblock %}
 <body>
         {% if user.is_authenticated %}
-        <div class="login ">
+        <nav class="header">
             <div class="name"> 
-                <img src="{% static 'website/profile.jpg' %}" id="profile">
+                <img src="{% static 'website/profile.jpg' %}" id="profile" alt="Profile icon">
                 Logged in as: {{user.get_username}}
             </div>
             <h1 style="padding:0.5rem"> Meeting Planner</h1>
@@ -23,16 +23,17 @@
                 {% csrf_token %}
                 <button type="submit">Logout</button>
             </form>
-        </div>
+        </nav>
         {%else %}
-        <div class="login ">
+        <nav class="header">
             <div></div>
             <h1 style="padding:0.5rem"> Meeting Planner</h1>
             <form method="get" action="{% url 'login' %}">
                 <button type="submit">Login</button>
             </form>    
+        </div>
         {%endif%}
-    </div>
+
 
     <div class="content">
     {% block content %}
@@ -40,8 +41,7 @@
     </div>
     
     <div id="footer">
-        Contrast:
-        <label class="switch">
+        <label class="switch" for="darklight">
             <input type="checkbox" id="darklight">
             <span class="slider round"></span>
         </label>

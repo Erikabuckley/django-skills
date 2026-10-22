@@ -1,7 +1,7 @@
 :root {
     --main: #014e3c;
     --button: #cfe0d0;
-    --light: floralwhite;
+    --light: #fffaf0;
     --dark: #206c5e;
 
 }
@@ -220,22 +220,22 @@ input:checked + .slider:before {
 
 /*#######################base.html#############################*/
 
-.login{
+.header{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     padding: 1rem;
     align-items: center;
 }
 
-.login > :first-child {
+.header > :first-child {
     justify-self: start;
 }
 
-.login > :nth-child(2) {
+.header > :nth-child(2) {
     justify-self: center;
 }
 
-.login > :last-child {
+.header > :last-child {
     justify-self: end;
 }
 
