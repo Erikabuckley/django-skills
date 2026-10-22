@@ -12,12 +12,12 @@
 
     {% if user.is_authenticated %}
         <div class="card">
-            <div class="item meetings">
-                <h2>Next Meeting: {{ nextmeeting.title }} on {{ nextmeeting.date }}</h2>
-                </ul>
+            <div class="item dash meetings">
+                <h2>Next Meeting</h2>
+                <h3>{{ nextmeeting.title }} </h3>
+                <h3>{{ nextmeeting.date }}</h3>
             </div>
-        </div>
-        <div class="card">
+
             <div class="item dash meetings">
                 <h2>Upcoming Meetings</h2>
                     {% for meeting in meetings %}
@@ -77,30 +77,27 @@
         
 
     {%else%}
-        <h1 style="margin:0">Welcome to the Meeting Planner!</h1>
+        <div class="nonauthcard">
+            <div class="card">
+                <div class="item dash">
+                    <h2>View your meetings</h2>
+                    <img src="{% static 'website/icon.png' %}" width="150" height="150" alt="Photo of a computer">
+                </div>
+                <div class="item">
+                    <h2>Look at meeting rooms</h2>
+                    <img src="{% static 'website/floorplan.png' %}" width="150" height="150" alt="Photo of a floorplan">
 
-        <div class="card">
-            <div class="item">
-                <h2>View your meetings</h2>
-                <img src="{% static 'website/icon.png' %}" width="150" height="150" alt="Photo of a computer">
+                </div>
+                <div class="item dash">
+                    <h2>Plan ahead</h2>
+                    <img src="{% static 'website/plan.png' %}" width="150" height="150" alt="Photo of a pen and pencil">
+                </div>
             </div>
-            <div class="item">
-                <h2>Look at meeting rooms</h2>
-                <img src="{% static 'website/floorplan.png' %}" width="150" height="150" alt="Photo of a floorplan">
-
-            </div>
-            <div class="item">
-                <h2>Plan ahead</h2>
-                <img src="{% static 'website/plan.png' %}" width="150" height="150" alt="Photo of a pen and pencil">
+            <div class="card">
+                <div class="item dash" id="notice">
+                    <h2 >Please login to your account to see current meetings</h2>
+                </div>
             </div>
         </div>
-        <div class="card" style="margin-top:auto">
-            <div class="item" id="notice">
-                <h2 >Please login to your account to see current meetings</h2>
-            </div>
-        </div>
-
-
     {%endif%}
-
 {%endblock%}

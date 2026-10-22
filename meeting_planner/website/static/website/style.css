@@ -13,6 +13,7 @@ body {
     margin: 0;
     display:flex;
     flex-direction: column;
+    min-height: 100dvh;
 }
 
 button {
@@ -130,10 +131,16 @@ input{
     color:black;
 }
 
-#footer{
+#mode{
     padding: 1rem;
-    margin-top: auto;
+    bottom: 0;
     align-items: center;
+    position: fixed;
+}
+
+#footer{
+    padding:1rem;
+
 }
 
 /*######################dark mode ##############################*/
@@ -223,7 +230,7 @@ input:checked + .slider:before {
 .header{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    padding: 1rem;
+    padding: 1.5rem;
     align-items: center;
 }
 
@@ -256,6 +263,9 @@ input:checked + .slider:before {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    height: 100%;
+    flex-grow: 1;
 }
 
 #login-button{
