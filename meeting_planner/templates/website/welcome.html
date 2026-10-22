@@ -19,7 +19,7 @@
             </div>
 
             <div class="item dash meetings">
-                <h2>Upcoming Meetings</h2>
+                <h2>Your Meetings</h2>
                     {% for meeting in meetings %}
                         <p><a href="{% url 'detail' meeting.id %}">
                             {{meeting.title}}
