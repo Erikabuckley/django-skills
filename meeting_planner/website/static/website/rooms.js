@@ -33,7 +33,6 @@ async function color_floorplan(room){
         const response = await getOccupied(room.id);
 
         occupied = response.occupied;
-        console.log(occupied)
         if (occupied){
             room.style.fill =  'rgba(255, 20, 20, 0.55)'
         }

@@ -43,3 +43,39 @@
     align-items: center;
     justify-content: center;
 }
+
+
+/*################################callender################################*/
+#calendar {
+  width: 100%;
+}
+
+#month {
+  text-align:center;
+  text-transform:uppercase;
+}
+
+.day {
+  display:inline;
+  width:13.285%;
+  height: 13.285%;
+  padding: 3% 0.5%;
+  float:left;
+  text-align:center;
+  font-size:1.2em;
+  border-radius: 0.4rem;
+}
+
+.day:hover {
+  background-color: lightgray;
+}
+
+.hasEvent {
+  background-color:var(--main);
+  color: var(--light)
+}
+
+
+.home{
+    display: flex;
+}

@@ -19,7 +19,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 from website.views import welcome, get_meeting_data, get_riddle
-from meetings.views import get_occupied
+from meetings.views import get_occupied, get_dates
 
 #we add names to enable us e to maintain url mappings easier
 urlpatterns = [
@@ -29,5 +29,6 @@ urlpatterns = [
     path('auth/', include('django.contrib.auth.urls')),
     path("api/meeting-data/", get_meeting_data, name="meeting_data"),
     path("api/riddle-data/", get_riddle, name="riddle_data"),
-    path("api/meeting-occupied/", get_occupied, name="occupied_data")
+    path("api/meeting-occupied/", get_occupied, name="occupied_data"),
+    path("api/meeting-days/", get_dates, name="meeting_days")
 ]

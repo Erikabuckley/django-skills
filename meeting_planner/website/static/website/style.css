@@ -96,6 +96,15 @@ input{
     padding :0.5rem;
 }
 
+.card-horisontal{
+    display: flex;
+    flex-direction: column;
+    color: var(--main);
+    gap: 1rem;
+    padding :0.5rem;
+}
+
+
 .item{
     padding: 1rem 2rem;
     background-color: var(--light);
@@ -273,9 +282,19 @@ input:checked + .slider:before {
 
 }
 
+@media screen and (max-width:1000px) {
+    .home {
+        flex-direction: column;
+    }
 
+
+}
 @media screen and (max-width:700px) {
     .card {
+        flex-direction: column;
+    }
+
+    .home {
         flex-direction: column;
     }
 

@@ -69,6 +69,7 @@ def check_overlap(form, new):
             return None
 
     meeting.save()
+    form.save_m2m()
     if new:
         return redirect("welcome")
     else:
@@ -116,7 +117,6 @@ def delete(request, id):
 @require_GET
 def get_occupied(request):
     name = request.GET.get("name")
-    print("api checknig {}".format(name))
     meetings = Meeting.objects.filter(
         room__name=name,
         date=timezone.localdate()
@@ -132,3 +132,19 @@ def get_occupied(request):
             return JsonResponse({"occupied": True})
 
     return JsonResponse({"occupied": False})
+
+@require_GET
+def get_dates(request):
+    current_month = request.GET.get("month")
+    current_year = request.GET.get("year")
+    print(current_month)
+    meetings = Meeting.objects.filter(
+        date__month=current_month,
+        date__year=current_year
+    )
+
+    dates = sorted(set(
+        meeting.date.day for meeting in meetings
+    ))
+
+    return JsonResponse({"dates": dates})

@@ -18,10 +18,6 @@ def welcome(request):
                 participants__id=request.user.id,
                 date__gt=timezone.now()
             ),
-            "nextmeeting": Meeting.objects.filter(
-                participants__id=request.user.id,
-                date__gt=timezone.now()
-            ).order_by('date').first(),
             "pastmeetings": Meeting.objects.filter(
                 participants__id=request.user.id,
                 date__lt=timezone.now()
