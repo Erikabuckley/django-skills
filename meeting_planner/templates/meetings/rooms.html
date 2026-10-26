@@ -14,9 +14,9 @@
 
     <div class="card">
         <div class="item rooms">
-            <h2>Rooms in the building</h2>
+            <h2>Current availability</h2>
             {% for room in rooms %}
-                <p>{{room}}</p>
+                <p >{{room}}</p>
             {% endfor %}
         </div>
         <div class="item floorplan">
@@ -25,12 +25,12 @@
                 class="floorplan-overlay"
                 viewBox="0 0 564 476"
                 xmlns="http://www.w3.org/2000/svg">
-                <rect class="room" id="Room 1" x="20" y="300" width="130" height="133" />
-                <rect class="room" id="Room 2" x="156" y="300" width="130" height="133" />
-                <rect class="room" id="Room 3" x="296" y="300" width="130" height="133" />
-                <rect class="room" id="Room 4" x="17" y="15" width="210" height="147" />
-                <rect class="room" id="Room 5" x="230" y="15" width="314" height="207" />
-                <rect class="room" id="Room 6" x="425" y="300" width="110" height="133" />
+                <rect class="room" id="Meeting room 1" x="20" y="300" width="130" height="133" />
+                <rect class="room" id="Meeting room 2" x="156" y="300" width="130" height="133" />
+                <rect class="room" id="Meeting room 3" x="296" y="300" width="130" height="133" />
+                <rect class="room" id="Large meeting room" x="17" y="15" width="210" height="147" />
+                <rect class="room" id="Communal area" x="230" y="15" width="314" height="207" />
+                <rect class="room" id="Conference suite" x="425" y="300" width="110" height="133" />
             </svg>
         </div>
     </div>

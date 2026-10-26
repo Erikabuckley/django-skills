@@ -178,13 +178,15 @@ showRiddle();
 
 async function showRiddle() {
   try {
-    const riddle = await getRiddle();
 
-    document.getElementById("riddle").textContent =
-      `${riddle.riddle}`;    
+    document.getElementById("riddle").textContent = 'test123';    
+    // const riddle =  getRiddle();
+
+    // document.getElementById("riddle").textContent =
+    //   `${riddle.riddle}`;    
       
-      document.getElementById("answer").textContent =
-      `${riddle.answer}`;
+    //   document.getElementById("answer").textContent =
+    //   `${riddle.answer}`;
   } catch (error) {
     document.getElementById("riddle").textContent =
       `Error fetching riddle: ${error.message}`;

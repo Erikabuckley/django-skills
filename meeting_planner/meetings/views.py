@@ -3,6 +3,10 @@ from django.forms import modelform_factory
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.http import JsonResponse
+from django.utils import timezone
+from django.views.decorators.http import require_GET
+
 from django import forms
 from meetings.models import Meeting, Room
 
@@ -108,3 +112,23 @@ def delete(request, id):
         return redirect("welcome")
     else:
         return render(request, "meetings/confirm_delete.html", {"meeting" : meeting})
+
+@require_GET
+def get_occupied(request):
+    name = request.GET.get("name")
+    print("api checknig {}".format(name))
+    meetings = Meeting.objects.filter(
+        room__name=name,
+        date=timezone.localdate()
+    )
+
+    now = timezone.localtime()
+
+    for meeting in meetings:
+        start = datetime.combine(meeting.date, meeting.start_time)
+        end = start + timedelta(hours=meeting.duration)
+
+        if start <= now.replace(tzinfo=None) < end:
+            return JsonResponse({"occupied": True})
+
+    return JsonResponse({"occupied": False})
