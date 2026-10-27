@@ -41,6 +41,8 @@ def get_meeting_data(request):
             status=500,
         )
     try:
+        print(lat)
+        print(lon)
         response = requests.get(
                     "https://api.openweathermap.org/data/2.5/weather",
                     params={
@@ -57,7 +59,7 @@ def get_meeting_data(request):
 
     except requests.RequestException:
         return JsonResponse(
-            {"error": "Could not retrieve meeting data"},
+            {"error": "Could not retrieve location data"},
             status=502,
         )
 

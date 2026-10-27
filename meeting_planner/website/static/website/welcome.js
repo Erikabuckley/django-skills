@@ -119,7 +119,7 @@ async function getWeather(lat, lon) {
     );
 
     if (!response.ok) {
-        throw new Error("Failed to load meeting data");
+        throw new Error("Failed to load weather data");
     }
 
   return response.json();
@@ -177,12 +177,12 @@ showRiddle();
 async function showRiddle() {
   try {
 
-    // document.getElementById("riddle").textContent = 'test123';    
-    const riddle =  await getRiddle();
+    document.getElementById("riddle").textContent = 'test123';    
+    // const riddle =  await getRiddle();
 
-    document.getElementById("riddle").textContent = `${riddle.riddle}`;    
+    // document.getElementById("riddle").textContent = `${riddle.riddle}`;    
       
-    document.getElementById("answer").textContent = `${riddle.answer}`;
+    // document.getElementById("answer").textContent = `${riddle.answer}`;
 
   } catch (error) {
     document.getElementById("riddle").textContent =
