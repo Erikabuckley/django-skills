@@ -41,6 +41,7 @@ def get_meeting_data(request):
             status=500,
         )
     try:
+        print("hello")
         print(lat)
         print(lon)
         response = requests.get(

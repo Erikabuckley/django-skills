@@ -136,7 +136,6 @@ def get_occupied(request):
 def get_dates(request):
     current_month = request.GET.get("month")
     current_year = request.GET.get("year")
-    print(current_month)
     meetings = Meeting.objects.filter(
         date__month=current_month, date__year=current_year
     )
