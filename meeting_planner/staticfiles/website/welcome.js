@@ -1,6 +1,4 @@
 const canvas = document.getElementById("canvas");
-console.log("Canvas:", canvas);
-console.log('hello')
 const ctx = canvas.getContext("2d");
 let radius = canvas.height / 2;
 ctx.translate(radius, radius);
@@ -121,7 +119,7 @@ async function getWeather(lat, lon) {
     );
 
     if (!response.ok) {
-        throw new Error("Failed to load meeting data");
+        throw new Error("Failed to load weather data");
     }
 
   return response.json();
@@ -178,13 +176,14 @@ showRiddle();
 
 async function showRiddle() {
   try {
-    const riddle = await getRiddle();
 
-    document.getElementById("riddle").textContent =
-      `${riddle.riddle}`;    
+    document.getElementById("riddle").textContent = 'test123';    
+    // const riddle =  await getRiddle();
+
+    // document.getElementById("riddle").textContent = `${riddle.riddle}`;    
       
-      document.getElementById("answer").textContent =
-      `${riddle.answer}`;
+    // document.getElementById("answer").textContent = `${riddle.answer}`;
+
   } catch (error) {
     document.getElementById("riddle").textContent =
       `Error fetching riddle: ${error.message}`;
@@ -208,3 +207,60 @@ b = document.getElementById('reveal')
 b.addEventListener("click", () => {
   document.getElementById('answer').style.display = 'block'
 });
+
+const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const days = [30, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+current = new Date()
+var month = {
+  "title": months[current.getMonth()],
+  "days": days[current.getMonth()]
+};
+
+
+document.getElementById("month").textContent = month.title;
+
+const daysContainer = document.getElementById("days");
+
+for (let x = 1; x <= month.days; x++) {
+    const day = document.createElement("div");
+
+    day.textContent = x;
+    day.classList.add("day", "day-" + x);
+    day.id = "day-" + x;
+
+    daysContainer.appendChild(day);
+}
+
+
+
+
+
+async function getDays() {
+    const response = await fetch(
+        `/api/meeting-days/?month=${current.getMonth() + 1}&year=${current.getFullYear()}`
+    );
+
+    if (!response.ok) {
+        throw new Error("Failed to load days");
+    }
+
+    return response.json();
+}
+
+async function highlightDays() {
+    try {
+        const data = await getDays();
+        const daysWithEvents = data.dates;
+        console.log(daysWithEvents)
+
+        document.querySelectorAll(".day").forEach((day) => {
+            if (daysWithEvents.includes(Number(day.textContent))) {
+                day.classList.add("hasEvent");
+            }
+        });
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+highlightDays();

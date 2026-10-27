@@ -3,7 +3,9 @@ from django.shortcuts import render
 
 import os
 
+import logging
 
+logger = logging.getLogger(__name__)
 from django.http import JsonResponse
 from django.utils import timezone
 from django.views.decorators.http import require_GET
@@ -41,26 +43,31 @@ def get_meeting_data(request):
             status=500,
         )
     try:
-        print("hello")
-        print(lat)
-        print(lon)
         response = requests.get(
-                    "https://api.openweathermap.org/data/2.5/weather",
-                    params={
-                        "lat": lat,
-                        "lon": lon,
-                        "appid": api_key,
-                        "units": "metric",
-                    },
-                    timeout=10,
-                    )
-        response.raise_for_status()
+            "https://api.openweathermap.org/data/2.5/weather",
+            params={
+                "lat": lat,
+                "lon": lon,
+                "appid": api_key,
+                "units": "metric",
+            },
+            timeout=10,
+        )
 
-        return JsonResponse(response.json(), safe=False)
+        if not response.ok:
+            logger.error(
+                "Weather API failed: status=%s body=%s",
+                response.status_code,
+                response.text[:500],
+            )
+
+        response.raise_for_status()
+        return JsonResponse(response.json())
 
     except requests.RequestException:
+        logger.exception("Weather API request failed")
         return JsonResponse(
-            {"error": "Could not retrieve location data"},
+            {"error": "Could not retrieve weather data"},
             status=502,
         )
 

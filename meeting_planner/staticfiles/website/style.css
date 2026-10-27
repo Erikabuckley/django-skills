@@ -7,7 +7,7 @@
 }
 
 body {
-    font-family: 'Calibri', 'Trebuchet MS', sans-serif;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     color: var(--light);
     background-color: var(--main);
     margin: 0;
@@ -95,6 +95,15 @@ input{
     gap: 1rem;
     padding :0.5rem;
 }
+
+.card-horisontal{
+    display: flex;
+    flex-direction: column;
+    color: var(--main);
+    gap: 1rem;
+    padding :0.5rem;
+}
+
 
 .item{
     padding: 1rem 2rem;
@@ -257,6 +266,7 @@ input:checked + .slider:before {
     height: 30px;
     width: 30px;
     padding: 10px;
+    border-radius: 100%;
 }
 
 .content {
@@ -273,9 +283,19 @@ input:checked + .slider:before {
 
 }
 
+@media screen and (max-width:1000px) {
+    .home {
+        flex-direction: column;
+    }
 
+
+}
 @media screen and (max-width:700px) {
     .card {
+        flex-direction: column;
+    }
+
+    .home {
         flex-direction: column;
     }
 
