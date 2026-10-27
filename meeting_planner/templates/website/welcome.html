@@ -4,112 +4,119 @@
 {%load static%}
 
 {% block extra_scripts %}
-    <script defer src="{% static 'website/welcome.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'website/welcome.css' %}">
+<script defer src="{% static 'website/welcome.js' %}"></script>
+<link rel="stylesheet" href="{% static 'website/welcome.css' %}">
 {% endblock %}
 
 {% block content%}
 
-    {% if user.is_authenticated %}
-        <div class="home">
-            <div>
-                <div class="card">
-                    <div class="item dash meetings">
-                        <h2>Book a new meeting</h2>
-                        <p class="in-actions" style="margin-top:auto"><a id="book" href="{% url 'new' %}">Book meeting</a></p>
-                    </div>
-
-                    <div class="item dash">
-                        <h2>Todays Information</h2>
-                        <p id="date"></p>
-                        <p id="location"></p>
-                        <div class = temp-circle>
-                            <div id="temp">Loading</div>
-                            <svg id="circle">
-                                <circle id="fail-value" r="40" cx="50" cy="50" stroke="grey" fill="none" stroke-width="5" stroke-linecap="round" stroke-dasharray="75% 25%" stroke-dashoffset="-39.25%"></circle>
-                                <circle id="success-value" r="40" cx="50" cy="50" stroke="rgb(0,0,240)" fill="none" stroke-width="5" stroke-linecap="round" stroke-dasharray="60% 40%" stroke-dashoffset="-39.25%"></circle>
-                            </svg>
-                        </div>
-                        <p id="weather"></p>
-                    </div>
-
-                    <div class="item dash">
-                        <h2>Time</h2>
-                        <canvas id="canvas" width="200" height="200" ></canvas>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="item dash">
-                        <h2>Rooms List</h2>
-                        <a href="{%url 'rooms'%}"><img src="{% static 'website/floorplan.png' %}" width="150" height="150" alt="Floorplan button"></a>
-                        <br><br>
-                        <p style=" margin-top:auto;">Click floorplan to view the rooms</a></p>
-                    </div>
-
-                    <div class="item dash meetings">
-                        <h2>Past Meetings</h2>
-                            {% for meeting in pastmeetings %}
-                                <p><a href="{% url 'detail' meeting.id %}">
-                                    {{meeting.title}}
-                                </a></p>
-                            {% endfor %}
-                        </ul>
-                        <p style=" margin-top:auto;">Click the meeting for more info</p>
-                    </div>
-
-                    <div class="item dash">
-                        <h2>Riddle of the Day</h2>
-                        <p id="riddle"></p>
-                        <p id="answer"></p>
-                        <button id="reveal" class="in-button"> Click to reveal</button>
-                    </div>
-                </div>
+{% if user.is_authenticated %}
+<div class="home">
+    <div>
+        <div class="card">
+            <div class="item dash meetings">
+                <h2>Book a new meeting</h2>
+                <p>
+                    Add a new meeting to fill your calender
+                </p>
+                <p class="in-actions" style="margin-top:auto"><a id="book" href="{% url 'new' %}">Book meeting</a></p>
             </div>
-            
 
-            <div class="card-horisontal">
-                <div class="item">
-                    <div id="calendar">
-                        <h2 id="month"></h2>
-                        <div id="days"></div>
-                    </div>
+            <div class="item dash">
+                <h2>Todays Information</h2>
+                <p id="date"></p>
+                <p id="location"></p>
+                <div class=temp-circle>
+                    <div id="temp">Loading</div>
+                    <svg id="circle">
+                        <circle id="fail-value" r="40" cx="50" cy="50" stroke="grey" fill="none" stroke-width="5"
+                            stroke-linecap="round" stroke-dasharray="75% 25%" stroke-dashoffset="-39.25%"></circle>
+                        <circle id="success-value" r="40" cx="50" cy="50" stroke="rgb(0,0,240)" fill="none"
+                            stroke-width="5" stroke-linecap="round" stroke-dasharray="60% 40%"
+                            stroke-dashoffset="-39.25%"></circle>
+                    </svg>
                 </div>
-                <div class="item dash meetings">
-                    <h2>Your Meetings</h2>
-                    {% for meeting in meetings %}
-                        <p><a href="{% url 'detail' meeting.id %}">
-                            {{meeting.title}}
-                        </a>{{meeting.date}}</p>
-                    {% endfor %}
-                </div>
+                <p id="weather"></p>
+            </div>
+
+            <div class="item dash">
+                <h2>Time</h2>
+                <canvas id="canvas" width="200" height="200"></canvas>
             </div>
         </div>
 
-            
-
-    {%else%}
-        <div class="nonauthcard">
-            <div class="card">
-                <div class="item dash">
-                    <h2>View your meetings</h2>
-                    <img src="{% static 'website/icon.png' %}" width="150" height="150" alt="Photo of a computer">
-                </div>
-                <div class="item">
-                    <h2>Look at meeting rooms</h2>
-                    <img src="{% static 'website/floorplan.png' %}" width="150" height="150" alt="Photo of a floorplan">
-
-                </div>
-                <div class="item dash">
-                    <h2>Plan ahead</h2>
-                    <img src="{% static 'website/plan.png' %}" width="150" height="150" alt="Photo of a pen and pencil">
-                </div>
+        <div class="card">
+            <div class="item dash">
+                <h2>Rooms List</h2>
+                <a href="{%url 'rooms'%}"><img src="{% static 'website/floorplan.png' %}" width="150" height="150"
+                        alt="Floorplan button"></a>
+                <br><br>
+                <p style=" margin-top:auto;">Click floorplan to view the rooms</a></p>
             </div>
-            <div class="card">
-                <div class="item dash" id="notice">
-                    <h2 >Please login to your account to see current meetings</h2>
-                </div>
+
+            <div class="item dash meetings">
+                <h2>Past Meetings</h2>
+                {% for meeting in pastmeetings %}
+                <p><a href="{% url 'detail' meeting.id %}">
+                        {{meeting.title}}
+                    </a></p>
+                {% endfor %}
+                </ul>
+                <p style=" margin-top:auto;">Click the meeting for more info</p>
+            </div>
+
+            <div class="item dash">
+                <h2>Riddle of the Day</h2>
+                <p id="riddle"></p>
+                <p id="answer"></p>
+                <button id="reveal" class="in-button"> Click to reveal</button>
             </div>
         </div>
-    {%endif%}
+    </div>
+
+
+    <div class="card-horisontal">
+        <div class="item">
+            <div id="calendar">
+                <h2 id="month"></h2>
+                <div id="days"></div>
+            </div>
+        </div>
+        <div class="item dash meetings">
+            <h2>Your Meetings</h2>
+            {% for meeting in meetings %}
+            <p><a href="{% url 'detail' meeting.id %}">
+                    {{meeting.title}}
+                </a>{{meeting.date}}</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+
+{%else%}
+<div class="nonauthcard">
+    <div class="card">
+        <div class="item dash">
+            <h2>View your meetings</h2>
+            <img src="{% static 'website/icon.png' %}" width="150" height="150" alt="Photo of a computer">
+        </div>
+        <div class="item">
+            <h2>Look at meeting rooms</h2>
+            <img src="{% static 'website/floorplan.png' %}" width="150" height="150" alt="Photo of a floorplan">
+
+        </div>
+        <div class="item dash">
+            <h2>Plan ahead</h2>
+            <img src="{% static 'website/plan.png' %}" width="150" height="150" alt="Photo of a pen and pencil">
+        </div>
+    </div>
+    <div class="card">
+        <div class="item dash" id="notice">
+            <h2>Please login to your account to see current meetings</h2>
+        </div>
+    </div>
+</div>
+{%endif%}
 {%endblock%}

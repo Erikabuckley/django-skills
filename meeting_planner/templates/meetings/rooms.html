@@ -2,41 +2,35 @@
 {% load static %}
 
 {% block extra_scripts %}
-    <script defer src="{% static 'website/rooms.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'website/rooms.css' %}">
+<script defer src="{% static 'website/rooms.js' %}"></script>
+<link rel="stylesheet" href="{% static 'website/rooms.css' %}">
 {% endblock %}
 
 {% block title%}Rooms list{%endblock%}
 
 {% block content%}
-    <h1>Current availability</h1>
-    <p id="selectedroom">Selected room</p>
+<h1>Current availability</h1>
+<p id="selectedroom">Selected room</p>
 
-    <div class="card">
-        <div class="item rooms">
-            <h2>Rooms in the building</h2>
-            {% for room in rooms %}
-                <p >{{room}}</p>
-            {% endfor %}
-        </div>
-        <div class="item floorplan">
-            <img src="{% static 'website/floorplan.png' %}" id="floorplan" alt="Flooplan">
-            <svg
-                class="floorplan-overlay"
-                viewBox="0 0 564 476"
-                xmlns="http://www.w3.org/2000/svg">
-                <rect class="room" id="Meeting room 1" x="20" y="300" width="130" height="133" />
-                <rect class="room" id="Meeting room 2" x="156" y="300" width="130" height="133" />
-                <rect class="room" id="Meeting room 3" x="296" y="300" width="130" height="133" />
-                <rect class="room" id="Large meeting room" x="17" y="15" width="210" height="147" />
-                <rect class="room" id="Communal area" x="230" y="15" width="314" height="207" />
-                <rect class="room" id="Conference suite" x="425" y="300" width="110" height="133" />
-            </svg>
-        </div>
+<div class="card">
+    <div class="item rooms">
+        <h2>Rooms in the building</h2>
+        {% for room in rooms %}
+        <p>{{room}}</p>
+        {% endfor %}
     </div>
+    <div class="item floorplan">
+        <img src="{% static 'website/floorplan.png' %}" id="floorplan" alt="Flooplan" width="564" height="476">
+        <svg class="floorplan-overlay" viewBox="0 0 564 476" xmlns="http://www.w3.org/2000/svg">
+            <rect class="room" id="Meeting room 1" x="29" y="300" width="122" height="133" />
+            <rect class="room" id="Meeting room 2" x="161" y="300" width="122" height="133" />
+            <rect class="room" id="Meeting room 3" x="293" y="300" width="122" height="133" />
+            <rect class="room" id="Large meeting room" x="29" y="14" width="196" height="147" />
+            <rect class="room" id="Communal area" x="235" y="14" width="300" height="207" />
+            <rect class="room" id="Conference suite" x="425" y="300" width="110" height="133" />
+        </svg>
+    </div>
+</div>
 
-    <p class="actions"><a href="{% url 'welcome' %}">Go home</a></p>
-
-
-
+<p class="actions"><a href="{% url 'welcome' %}">Go home</a></p>
 {%endblock%}

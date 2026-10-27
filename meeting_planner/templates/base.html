@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,35 +12,36 @@
 </head>
 
 {% block extra_scripts %}{% endblock %}
+
 <body>
-        {% if user.is_authenticated %}
-        <nav class="header">
-            <div class="name"> 
-                <img src="{% static 'website/profile.jpg' %}" id="profile" alt="Profile icon">
-                Logged in as: {{user.get_username}}
-            </div>
-            <h1 style="padding:0.5rem"> Meeting Planner</h1>
-            <form method="post" action="{%url 'logout'%}">
-                {% csrf_token %}
-                <button type="submit">Logout</button>
-            </form>
-        </nav>
-        {%else %}
-        <nav class="header">
-            <div></div>
-            <h1 style="margin:0">Welcome to the Meeting Planner!</h1>
-            <form method="get" action="{% url 'login' %}">
-                <button type="submit">Login</button>
-            </form>    
-        </nav>
-        {%endif%}
+    {% if user.is_authenticated %}
+    <nav class="header">
+        <div class="name">
+            <img src="{% static 'website/profile.jpg' %}" id="profile" alt="Profile icon">
+            <h3>{{user.get_username}}</h3>
+        </div>
+        <h1 style="padding:0.5rem"> Meeting Planner</h1>
+        <form method="post" action="{%url 'logout'%}">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
+    </nav>
+    {%else %}
+    <nav class="header">
+        <div></div>
+        <h1 style="margin:0">Welcome to the Meeting Planner!</h1>
+        <form method="get" action="{% url 'login' %}">
+            <button type="submit">Login</button>
+        </form>
+    </nav>
+    {%endif%}
 
 
     <div class="content">
-    {% block content %}
-    {% endblock%}
+        {% block content %}
+        {% endblock%}
     </div>
-    
+
     <div id="footer">
         <h1></h1>
     </div>
@@ -51,4 +53,5 @@
     </div>
 
 </body>
+
 </html>

@@ -12,7 +12,7 @@ from meetings.models import Meeting, Room
 
 from datetime import datetime, timedelta
 
-
+# view to send sign up data to the backend
 def signup(request):
     if request.method == "POST":
         form = UserCreationForm(request.POST)
@@ -26,46 +26,43 @@ def signup(request):
 
     return render(request, "registration/signup.html", {"form": form})
 
+
 @login_required
 def detail(request, id):
-    meeting = get_object_or_404(Meeting, pk=id)#returns 404 if not found for or given class with id
-    return render(request, "meetings/detail.html",{"meeting": meeting})
+    meeting = get_object_or_404(
+        Meeting, pk=id
+    )  # returns 404 if not found for or given class with id
+    return render(request, "meetings/detail.html", {"meeting": meeting})
+
 
 @login_required
 def rooms_list(request):
-    return render(request, "meetings/rooms.html",{"rooms": Room.objects.all()})
+    return render(request, "meetings/rooms.html", {"rooms": Room.objects.all()})
 
 
-MeetingForm = modelform_factory(Meeting, exclude=[],     widgets={
-        'date': forms.DateInput(attrs={'type': 'date'}),
-    })
+MeetingForm = modelform_factory(
+    Meeting,
+    exclude=[],
+    widgets={
+        "date": forms.DateInput(attrs={"type": "date"}),
+    },
+)
+
 
 def check_overlap(form, new):
     meeting = form.save(commit=False)
 
-    meetings = Meeting.objects.filter(
-        date=meeting.date,
-        room=meeting.room
-    )
+    meetings = Meeting.objects.filter(date=meeting.date, room=meeting.room)
 
-    new_start = datetime.combine(
-        meeting.date, meeting.start_time
-    )
+    new_start = datetime.combine(meeting.date, meeting.start_time)
     new_end = new_start + timedelta(hours=meeting.duration)
 
     for existing in meetings:
-        existing_start = datetime.combine(
-            existing.date, existing.start_time
-        )
-        existing_end = existing_start + timedelta(
-            hours=existing.duration
-        )
+        existing_start = datetime.combine(existing.date, existing.start_time)
+        existing_end = existing_start + timedelta(hours=existing.duration)
 
         if new_start < existing_end and new_end > existing_start:
-            form.add_error(
-                None,
-                "This room is already booked during that time."
-            )
+            form.add_error(None, "This room is already booked during that time.")
             return None
 
     meeting.save()
@@ -75,26 +72,28 @@ def check_overlap(form, new):
     else:
         return redirect("detail", id)
 
+
 @login_required
 def new(request):
     if request.method == "POST":
         form = MeetingForm(request.POST)
-        #checks if fields are valid
+        # checks if fields are valid
         if form.is_valid():
             response = check_overlap(form, True)
             if response is not None:
                 return response
     else:
         form = MeetingForm()
-    #if form was not valid its called again
-    return render(request, "meetings/new.html", {"form" : form})
+    # if form was not valid its called again
+    return render(request, "meetings/new.html", {"form": form})
+
 
 @login_required
 def edit(request, id):
     meeting = get_object_or_404(Meeting, pk=id)
     if request.method == "POST":
         form = MeetingForm(request.POST, instance=meeting)
-        #checks if fields are valid
+        # checks if fields are valid
         if form.is_valid():
             response = check_overlap(form, False)
             if response is not None:
@@ -102,8 +101,9 @@ def edit(request, id):
 
     else:
         form = MeetingForm(instance=meeting)
-    #if form was not valid its called again
-    return render(request, "meetings/edit.html", {"form" : form})
+    # if form was not valid its called again
+    return render(request, "meetings/edit.html", {"form": form})
+
 
 @login_required
 def delete(request, id):
@@ -112,15 +112,13 @@ def delete(request, id):
         meeting.delete()
         return redirect("welcome")
     else:
-        return render(request, "meetings/confirm_delete.html", {"meeting" : meeting})
+        return render(request, "meetings/confirm_delete.html", {"meeting": meeting})
+
 
 @require_GET
 def get_occupied(request):
     name = request.GET.get("name")
-    meetings = Meeting.objects.filter(
-        room__name=name,
-        date=timezone.localdate()
-    )
+    meetings = Meeting.objects.filter(room__name=name, date=timezone.localdate())
 
     now = timezone.localtime()
 
@@ -133,18 +131,16 @@ def get_occupied(request):
 
     return JsonResponse({"occupied": False})
 
+
 @require_GET
 def get_dates(request):
     current_month = request.GET.get("month")
     current_year = request.GET.get("year")
     print(current_month)
     meetings = Meeting.objects.filter(
-        date__month=current_month,
-        date__year=current_year
+        date__month=current_month, date__year=current_year
     )
 
-    dates = sorted(set(
-        meeting.date.day for meeting in meetings
-    ))
+    dates = sorted(set(meeting.date.day for meeting in meetings))
 
     return JsonResponse({"dates": dates})

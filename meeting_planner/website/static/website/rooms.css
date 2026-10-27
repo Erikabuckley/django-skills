@@ -1,12 +1,11 @@
-/*############################roomss######################*/
-.floorplan{
-    position:relative;
+/*############################rooms######################*/
+.floorplan {
+    position: relative;
     width: 100%;
 }
-#floorplan{
+
+#floorplan {
     display: block;
-    width: 100%;
-    height: auto;
 }
 
 .floorplan-overlay {
@@ -16,17 +15,7 @@
     display: block;
 }
 
-.room {
-    fill: rgba(70, 131, 193, 0.1);
-    transition: fill 0.2s ease;
-    cursor: pointer;
-}
-
-.room:hover {
-    fill: rgba(3, 3, 3, 0.1);
-}
-
-.rooms h2{
+.rooms h2 {
     width: max-content;
 }
 
