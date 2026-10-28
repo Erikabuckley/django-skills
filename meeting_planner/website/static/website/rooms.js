@@ -1,4 +1,4 @@
-// fills the box by the mouth with the room hovered over
+// fills the box by the mouse with the room hovered over
 text = document.getElementById("selectedroom");
 
 document.querySelectorAll(".room").forEach((room) => {
@@ -25,6 +25,7 @@ document.addEventListener("mousemove", (event) => {
     text.style.top = `${event.clientY - 15}px`;
 });
 
+// colours the room due to its availability
 document.querySelectorAll(".room").forEach((room) => {
     color_floorplan(room)
 });
