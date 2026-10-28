@@ -36,34 +36,32 @@
     font-weight: bold;
 }
 
-
-.nonauthcard{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-
 /*################################callender################################*/
-#calendar {
-  width: 100%;
-}
 
 #month {
   text-align:center;
   text-transform:uppercase;
 }
 
+#days{
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 9px;
+}
+
 .day {
-  display:inline;
-  width:13.285%;
-  height: 13.285%;
-  padding: 2.5% 0.5%;
-  float:left;
-  text-align:center;
-  font-size:1.2em;
-  border-radius: 0.4rem;
+  width: 90%;
+  height:100%;
+  aspect-ratio: 1 / 1;
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 1.2em;
+  border-radius: 100%;
+  box-sizing: border-box;
+  padding:1rem;
 }
 
 .day:hover {
@@ -78,4 +76,9 @@
 
 .home{
     display: flex;
+}
+
+.dark-mode #reveal{
+    background-color: var(--main);
+    color: var(--light);
 }

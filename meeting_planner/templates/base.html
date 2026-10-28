@@ -28,7 +28,9 @@
     </nav>
     {%else %}
     <nav class="header">
-        <div></div>
+        <form method="get" action="{% url 'welcome' %}">
+            <button type="submit">Home</button>
+        </form>
         <h1 style="margin:0">Welcome to the Meeting Planner!</h1>
         <form method="get" action="{% url 'login' %}">
             <button type="submit">Login</button>
