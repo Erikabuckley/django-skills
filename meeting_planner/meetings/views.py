@@ -118,7 +118,8 @@ def delete(request, id):
 @require_GET
 def get_occupied(request):
     name = request.GET.get("name")
-    meetings = Meeting.objects.filter(room__name=name, date=timezone.localdate())
+    meetings = Meeting.objects.filter(room__name=name, 
+                                      date=timezone.localdate())
 
     now = timezone.localtime()
 
@@ -137,7 +138,9 @@ def get_dates(request):
     current_month = request.GET.get("month")
     current_year = request.GET.get("year")
     meetings = Meeting.objects.filter(
-        date__month=current_month, date__year=current_year
+        date__month=current_month, 
+        date__year=current_year,
+        participants__id=request.user.id
     )
 
     dates = sorted(set(meeting.date.day for meeting in meetings))

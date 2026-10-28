@@ -251,7 +251,6 @@ async function highlightDays() {
   try {
     const data = await getDays();
     const daysWithEvents = data.dates;
-    console.log(daysWithEvents)
 
     document.querySelectorAll(".day").forEach((day) => {
       if (daysWithEvents.includes(Number(day.textContent))) {
