@@ -10,16 +10,19 @@
 
 {% block content%}
 
-{% if user.is_authenticated %}
 <div class="home">
     <div>
         <div class="card">
             <div class="item dash meetings">
                 <h2>Book a new meeting</h2>
+                {% if user.is_authenticated %}
                 <p>
                     Add a new meeting to fill your calender
                 </p>
                 <p class="in-actions" style="margin-top:auto"><a id="book" href="{% url 'new' %}">Book meeting</a></p>
+                {%else%}
+                <p>Log in to book a new meeting</p>
+                {%endif%}
             </div>
 
             <div class="item dash">
@@ -56,6 +59,7 @@
 
             <div class="item dash meetings">
                 <h2>Past Meetings</h2>
+                {% if user.is_authenticated %}
                 {% for meeting in pastmeetings %}
                 <p><a href="{% url 'detail' meeting.id %}">
                         {{meeting.title}}
@@ -63,6 +67,9 @@
                 {% endfor %}
                 </ul>
                 <p style=" margin-top:auto;">Click the meeting for more info</p>
+                {%else%}
+                <p>Log in to view previous meetings</p>
+                {%endif%}
             </div>
 
             <div class="item dash">
@@ -82,38 +89,17 @@
         </div>
         <div class="item dash meetings">
             <h2>Next Meetings</h2>
+            {% if user.is_authenticated %}
             {% for meeting in meetings %}
             <p><a href="{% url 'detail' meeting.id %}">
                     {{meeting.title}}
                 </a>{{meeting.date}}</p>
             {% endfor %}
             <p style=" margin-top:auto;">Click the meeting for more info</p>
+            {%else%}
+            <p>To view future meetings please log in</p>
+            {%endif%}
         </div>
     </div>
 </div>
-
-
-
-{%else%}
-<div class="card">
-    <div class="item dash">
-        <h2>View your meetings</h2>
-        <img src="{% static 'website/icon.png' %}" width="150" height="150" alt="Photo of a computer">
-    </div>
-    <div class="item dash">
-        <h2>Look at meeting rooms</h2>
-        <img src="{% static 'website/floorplan.png' %}" width="150" height="150" alt="Photo of a floorplan">
-
-    </div>
-    <div class="item dash">
-        <h2>Plan ahead</h2>
-        <img src="{% static 'website/plan.png' %}" width="150" height="150" alt="Photo of a pen and pencil">
-    </div>
-</div>
-<div class="card">
-    <div class="item dash" id="notice">
-        <h2>Please login to your account to see current meetings</h2>
-    </div>
-</div>
-{%endif%}
 {%endblock%}
