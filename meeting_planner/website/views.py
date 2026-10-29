@@ -1,6 +1,7 @@
 import requests
 import os
 import logging
+from dotenv import load_dotenv
 
 from django.http import JsonResponse
 from django.shortcuts import render
@@ -11,6 +12,7 @@ from django.views.decorators.cache import never_cache
 from meetings.models import Meeting
 
 logger = logging.getLogger(__name__)
+load_dotenv()
 
 
 # loads welcome page and filters data dependant on authentication leel
@@ -73,7 +75,6 @@ def get_weather_data(request):
             {"error": "Could not retrieve weather data"},
             status=502,
         )
-
 
 # gets the riddle for
 @require_GET
