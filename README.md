@@ -100,7 +100,7 @@ If using Docker directly, build the image with:
 docker build -t meeting-planner .
 ```
 
-```
+```bash
 docker run --env-file .env -p 8000:8000 meeting-planner
 ```
 The Docker configuration should install the dependencies, copy the project files, collect static files, and start the application.

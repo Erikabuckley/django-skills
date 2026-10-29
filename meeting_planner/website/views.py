@@ -1,38 +1,41 @@
 import requests
-from django.shortcuts import render
-
 import os
-
 import logging
 
-logger = logging.getLogger(__name__)
 from django.http import JsonResponse
+from django.shortcuts import render
 from django.utils import timezone
 from django.views.decorators.http import require_GET
 from django.views.decorators.cache import never_cache
 
 from meetings.models import Meeting
 
+logger = logging.getLogger(__name__)
+
+
+# loads welcome page and filters data dependant on authentication leel
 def welcome(request):
     if request.user.is_authenticated:
         context = {
             "meetings": Meeting.objects.filter(
-                participants__id=request.user.id,
-                date__gt=timezone.now()
+                participants__id=request.user.id, date__gt=timezone.now()
             ),
             "pastmeetings": Meeting.objects.filter(
-                participants__id=request.user.id,
-                date__lt=timezone.now()
-            ).order_by('-date')
+                participants__id=request.user.id, date__lt=timezone.now()
+            ).order_by("-date"),
         }
 
     else:
         context = {}
-    return render(request, "website/welcome.html",context)#dictionary is passed to the template
+    return render(
+        request, "website/welcome.html", context
+    )  # dictionary is passed to the template
 
+
+# gets the currrent weather at teh requests lat and long
 @require_GET
 @never_cache
-def get_meeting_data(request):
+def get_weather_data(request):
     api_key = os.getenv("EXTERNAL_API_KEY")
     lat = request.GET.get("lat")
     lon = request.GET.get("lon")
@@ -71,8 +74,9 @@ def get_meeting_data(request):
             status=502,
         )
 
+
+# gets the riddle for
 @require_GET
-@never_cache
 def get_riddle(request):
     api_key = os.getenv("RIDDLE_KEY")
 
@@ -84,12 +88,18 @@ def get_riddle(request):
 
     try:
         response = requests.get(
-                    "https://api.apileague.com/retrieve-random-riddle?difficulty=hard",
-                    headers={
-                        "x-api-key": api_key,
-                    },
-                    timeout=10,
-                    )
+            "https://api.apileague.com/retrieve-random-riddle",
+            headers={
+                "x-api-key": api_key,
+            },
+            timeout=10,
+        )
+        if not response.ok:
+            logger.error(
+                "Riddle API failed: status=%s body=%s",
+                response.status_code,
+                response.text[:500],
+            )
         response.raise_for_status()
 
         return JsonResponse(response.json(), safe=False)

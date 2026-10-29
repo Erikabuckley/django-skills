@@ -76,7 +76,7 @@ function drawHand(ctx, pos, length, width) {
 date = new Date().toLocaleDateString()
 document.getElementById("date").textContent = date
 
-
+// gets the users current location
 navigator.geolocation.getCurrentPosition(showPosition, showError, { enableHighAccuracy: false, });
 
 async function showPosition(position) {
@@ -84,8 +84,6 @@ async function showPosition(position) {
   const lon = position.coords.longitude;
 
   try {
-
-
     const weather = await getWeather(lat, lon);
 
     document.getElementById("location").textContent =
@@ -115,7 +113,7 @@ function showError(error) {
 
 async function getWeather(lat, lon) {
   const response = await fetch(
-    `/api/meeting-data/?lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lon)}`
+    `/api/weather-data/?lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lon)}`
   );
 
   if (!response.ok) {
@@ -230,9 +228,6 @@ for (let x = 1; x <= month.days; x++) {
 
   daysContainer.appendChild(day);
 }
-
-
-
 
 
 async function getDays() {

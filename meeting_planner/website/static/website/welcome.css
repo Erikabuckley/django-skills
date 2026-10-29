@@ -1,84 +1,84 @@
 /*#######################welcome.html#############################*/
-
-#main-text{
+#main-text {
     display: flex;
     flex-direction: row;
     gap: 5rem;
     padding: 1rem;
 }
 
-.temp-circle{
+.temp-circle {
     position: relative;
-    display:flex;
+    display: flex;
     justify-content: center;
     align-items: center;
     width: 100px;
     height: 100px;
 }
-#temp{
+
+#temp {
     position: relative;
     z-index: 2;
 }
-#circle{
+
+#circle {
     position: absolute;
     z-index: 1;
-    top:0;
+    top: 0;
     left: 0;
 }
 
-#notice{
+#notice {
     margin-top: auto;
 }
 
-#answer{
+#answer {
     display: none;
     padding: 1rem;
     font-weight: bold;
 }
 
 /*################################callender################################*/
-
 #month {
-  text-align:center;
-  text-transform:uppercase;
+    text-align: center;
+    text-transform: uppercase;
 }
 
-#days{
+#days {
     display: grid;
     grid-template-columns: repeat(7, minmax(0, 1fr));
     gap: 9px;
 }
 
 .day {
-  width: 90%;
-  height:100%;
-  aspect-ratio: 1 / 1;
-  justify-self: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-size: 1.2em;
-  border-radius: 100%;
-  box-sizing: border-box;
-  padding:1rem;
+    width: 90%;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    justify-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 1.2em;
+    border-radius: 100%;
+    box-sizing: border-box;
+    padding: 1rem;
 }
 
 .day:hover {
-  background-color: lightgray;
+    background-color: lightgray;
 }
 
 .hasEvent {
-  background-color:var(--main);
-  color: var(--light)
+    background-color: var(--main);
+    color: var(--light)
 }
 
 
-.home{
+.home {
     display: flex;
 }
 
-.dark-mode #reveal{
+.dark-mode #reveal {
     background-color: var(--main);
     color: var(--light);
 }
