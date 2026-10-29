@@ -75,10 +75,8 @@ function drawHand(ctx, pos, length, width) {
 
 date = new Date().toLocaleDateString()
 document.getElementById("date").textContent = date
-
-
-navigator.geolocation.getCurrentPosition(showPosition, showError, {enableHighAccuracy: false,});
-
+navigator.geolocation.getCurrentPosition(showPosition, showError, {enableHighAccuracy: false,    timeout: 10000,
+    maximumAge: 300000});
 async function showPosition(position) {
   const lat = position.coords.latitude;
   const lon = position.coords.longitude;
@@ -115,7 +113,7 @@ function showError(error) {
 
 async function getWeather(lat, lon) {
     const response = await fetch(
-        `/api/meeting-data/?lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lon)}`
+        `/api/weather-data/?lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lon)}`
     );
 
     if (!response.ok) {
@@ -177,7 +175,7 @@ showRiddle();
 async function showRiddle() {
   try {
 
-    // document.getElementById("riddle").textContent = 'test123';    
+    // document.getElementById("riddle").textContent = 'test12345';    
     const riddle =  await getRiddle();
 
     document.getElementById("riddle").textContent = `${riddle.riddle}`;    
@@ -251,7 +249,6 @@ async function highlightDays() {
     try {
         const data = await getDays();
         const daysWithEvents = data.dates;
-        console.log(daysWithEvents)
 
         document.querySelectorAll(".day").forEach((day) => {
             if (daysWithEvents.includes(Number(day.textContent))) {
