@@ -10,7 +10,20 @@
 
 {% block content%}
 
+<div id="modal" class="modal-overlay">
+        <div class="modal-box">
+            <form class="form" method="post" style="align-items: center;">
+                {% csrf_token %}
+                <h1>Cookie alert</h1>
+                <img src="{% static 'website/image.png' %}" height="100" width="100">
+                <label for="cookie"></label>
+                <input required id="cookie" type="text" placeholder="Type your favourite cookie">
+                <button type="submit" id="closeBtn" class="in-button">Submit</button>
+            </form>
+        </div>
+    </div>
 <div class="home">
+
     <div>
         <div class="card">
             <div class="item dash meetings">

@@ -261,3 +261,20 @@ async function highlightDays() {
 }
 
 highlightDays();
+
+
+const modal = document.getElementById("modal");
+const closeBtn = document.getElementById("closeBtn");
+const cookieInput = document.getElementById("cookie");
+
+modal.classList.add("show");
+
+function closeModal(event) {
+    event.preventDefault();
+
+    if (cookieInput.value.trim() !== "") {
+        modal.classList.remove("show");
+    } 
+}
+
+closeBtn.addEventListener("click", closeModal);
