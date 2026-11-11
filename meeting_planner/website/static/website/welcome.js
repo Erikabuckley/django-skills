@@ -1,78 +1,3 @@
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
-let radius = canvas.height / 2;
-ctx.translate(radius, radius);
-radius = radius * 0.90
-drawClock();
-setInterval(drawClock, 1000);
-
-
-function drawClock() {
-  drawFace(ctx, radius);
-  drawNumbers(ctx, radius);
-  drawTime(ctx, radius);
-}
-
-function drawFace(ctx, radius) {
-  ctx.beginPath();
-  ctx.arc(0, 0, radius, 0, 2*Math.PI);
-  ctx.fillStyle = 'white';
-  ctx.fill();
-  ctx.strokeStyle = 'grey';
-  ctx.lineWidth = radius*0.05;
-  ctx.stroke();
-  ctx.beginPath();
-  ctx.arc(0, 0, radius*0.05, 0, 2*Math.PI);
-  ctx.fillStyle = 'grey';
-  ctx.fill();
-}
-
-function drawNumbers(ctx, radius) {
-  ctx.font = radius*0.15 + "px arial";
-  ctx.textBaseline="middle";
-  ctx.textAlign="center";
-  for(let num = 1; num < 13; num++){
-    let ang = num * Math.PI / 6;
-    ctx.rotate(ang);
-    ctx.translate(0, -radius*0.85);
-    ctx.rotate(-ang);
-    ctx.fillText(num.toString(), 0, 0);
-    ctx.rotate(ang);
-    ctx.translate(0, radius*0.85);
-    ctx.rotate(-ang);
-  }
-}
-
-function drawTime(ctx, radius){
-    const now = new Date();
-    let hour = now.getHours();
-    let minute = now.getMinutes();
-    let second = now.getSeconds();
-    //hour
-    hour=hour%12;
-    hour=(hour*Math.PI/6)+
-    (minute*Math.PI/(6*60))+
-    (second*Math.PI/(360*60));
-    drawHand(ctx, hour, radius*0.5, radius*0.04);
-    //minute
-    minute=(minute*Math.PI/30)+(second*Math.PI/(30*60));
-    drawHand(ctx, minute, radius*0.65, radius*0.04);
-    // second
-    second=(second*Math.PI/30);
-    drawHand(ctx, second, radius*0.7, radius*0.02);
-}
-
-function drawHand(ctx, pos, length, width) {
-    ctx.beginPath();
-    ctx.lineWidth = width;
-    ctx.lineCap = "round";
-    ctx.moveTo(0,0);
-    ctx.rotate(pos);
-    ctx.lineTo(0, -length);
-    ctx.stroke();
-    ctx.rotate(-pos);
-}
-
 date = new Date().toLocaleDateString()
 document.getElementById("date").textContent = date
 navigator.geolocation.getCurrentPosition(showPosition, showError, {enableHighAccuracy: false,    timeout: 10000,
@@ -175,12 +100,12 @@ showRiddle();
 async function showRiddle() {
   try {
 
-    // document.getElementById("riddle").textContent = 'test12345';    
-    const riddle =  await getRiddle();
+    document.getElementById("riddle").textContent = 'test12345';    
+    // const riddle =  await getRiddle();
 
-    document.getElementById("riddle").textContent = `${riddle.riddle}`;    
+    // document.getElementById("riddle").textContent = `${riddle.riddle}`;    
       
-    document.getElementById("answer").textContent = `${riddle.answer}`;
+    // document.getElementById("answer").textContent = `${riddle.answer}`;
 
   } catch (error) {
     document.getElementById("riddle").textContent =
@@ -230,9 +155,6 @@ for (let x = 1; x <= month.days; x++) {
 }
 
 
-
-
-
 async function getDays() {
     const response = await fetch(
         `/api/meeting-days/?month=${current.getMonth() + 1}&year=${current.getFullYear()}`
@@ -267,14 +189,23 @@ const modal = document.getElementById("modal");
 const closeBtn = document.getElementById("closeBtn");
 const cookieInput = document.getElementById("cookie");
 
-modal.classList.add("show");
+// Check if the user has already completed the modal
+if (document.cookie.includes("modalCompleted=true")) {
+    modal.classList.remove("show");
+} else {
+    modal.classList.add("show");
+}
 
 function closeModal(event) {
     event.preventDefault();
 
     if (cookieInput.value.trim() !== "") {
+
+        // Store cookie for 30 days
+        document.cookie = "modalCompleted=true; max-age=3600; path=/; SameSite=Lax";
+
         modal.classList.remove("show");
-    } 
+    }
 }
 
 closeBtn.addEventListener("click", closeModal);

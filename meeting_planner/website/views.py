@@ -24,7 +24,7 @@ def welcome(request):
             ),
             "pastmeetings": Meeting.objects.filter(
                 participants__id=request.user.id, date__lt=timezone.now()
-            ).order_by("-date"),
+            ).order_by("-date")[:6],
             "todos" : Todo.objects.filter(user=request.user, done=False)
         }
 

@@ -20,7 +20,7 @@
             <img src="{% static 'website/profile.jpg' %}" id="profile" alt="Profile icon">
             <h3>{{user.get_username}}</h3>
         </div>
-        <h1 style="padding:0.5rem"> Meeting Planner</h1>
+        <h1> Meeting Planner</h1>
         <form method="post" action="{%url 'logout'%}">
             {% csrf_token %}
             <button type="submit">Logout</button>

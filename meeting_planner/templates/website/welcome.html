@@ -29,15 +29,16 @@
     </div>
 </div>
 <div class="home">
-
     <div>
         <div class="card">
             <div class="item dash meetings">
-                <h2>Book a new meeting</h2>
+                <h2>Your meetings</h2>
                 {% if user.is_authenticated %}
-                <p>
-                    Add a new meeting to fill your calender
-                </p>
+                {% for meeting in meetings %}
+                <p><a href="{% url 'detail' meeting.id %}">
+                        {{meeting.title}}
+                    </a>{{meeting.date}}</p>
+                {% endfor %}
                 <p class="in-actions" style="margin-top:auto"><a id="book" href="{% url 'new' %}">Book meeting</a></p>
                 {%else%}
                 <p>Log in to book a new meeting</p>
@@ -61,9 +62,9 @@
                 <p id="weather"></p>
             </div>
 
-            <div class="item dash">
-                <h2>Time</h2>
-                <canvas id="canvas" width="200" height="200"></canvas>
+            <div class="item dash" id="calendar">
+                <h2 id="month"></h2>
+                <div id="days"></div>
             </div>
         </div>
 
@@ -101,60 +102,51 @@
     </div>
 
 
-    <div class="card-horisontal">
-        <div class="item" id="calendar">
-            <h2 id="month"></h2>
-            <div id="days"></div>
-        </div>
-        <div class="item dash meetings">
-            <h2>Next Meetings</h2>
-            {% if user.is_authenticated %}
-            {% for meeting in meetings %}
-            <p><a href="{% url 'detail' meeting.id %}">
-                    {{meeting.title}}
-                </a>{{meeting.date}}</p>
-            {% endfor %}
-            <p style=" margin-top:auto;">Click the meeting for more info</p>
-            {%else%}
-            <p>To view future meetings please log in</p>
-            {%endif%}
-        </div>
-    </div>
-    <div class="card horisontal">
+    <div class="card">
         <div class="item dash todo">
-            <h2>My To-do List</h2>
-            <dialog id="confirm-dialog">
-                <p id="confirm-message"></p>
-                <button id="confirm-ok-button">Yes</button>
-                <button id="confirm-cancel-button">No</button>
-            </dialog>
-            <!-- Search todos -->
-            <input type="search" name="searchText" placeholder="Search..." hx-get="{% url 'todo_search' %}"
-                hx-target="#todo-list" hx-swap="innerHTML" hx-trigger="input changed delay:500ms">
-
-            <!-- Add todo -->
-            <form hx-post="{% url 'todo_create' %}" hx-target="#todo-list" hx-swap="afterbegin"
-                hx-on::after-request="if(event.detail.successful) this.reset()">
-                {% csrf_token %}
-
-                <input type="text" name="name" placeholder="New todo" required autocomplete="off">
-
-                <button type="submit">Add</button>
-            </form>
-
-            <!-- Error messages -->
-            <div id="error"></div>
-
-            <!-- Todo list -->
-            {% include "website/todo_list.html" %}
-
-            <!-- Loading indicators -->
-            <div class="deleting">deleting...</div>
-            <div class="loading">loading...</div>
-            <!-- Todo count -->
-            <div style="margin-top: 0;">
-                <span id="todo-count">{{ todos.count }}</span> items
+            <div class="todo-top">
+                <h2>My To-do List</h2>
+                <dialog id="confirm-dialog">
+                    <p id="confirm-message"></p>
+                    <button id="confirm-ok-button">Yes</button>
+                    <button id="confirm-cancel-button">No</button>
+                </dialog>
+                <!-- Search todos -->
+                <input type="search" name="searchText" placeholder="Search..." hx-get="{% url 'todo_search' %}"
+                    hx-target="#todo-list" hx-swap="innerHTML" hx-trigger="input changed delay:500ms">
             </div>
+            
+            <div class="todo-mid">
+                <!-- Error messages -->
+                <div id="error"></div>
+
+                <!-- Todo list -->
+                {% include "website/todo_list.html" %}
+
+                <!-- Loading indicators -->
+                <div class="deleting">deleting...</div>
+                <div class="loading">loading...</div>
+                
+
+                
+                <!-- Todo count -->
+                <div style="margin-top: 0;">
+                    <span id="todo-count">{{ todos.count }}</span> items
+                </div>
+            </div>
+            <div class="todo-bottom">
+                <!-- Add todo -->
+                <form hx-post="{% url 'todo_create' %}" hx-target="#todo-list" hx-swap="afterbegin"
+                    hx-on::after-request="if(event.detail.successful) this.reset()">
+                    {% csrf_token %}
+
+                    <input type="text" name="name" placeholder="New todo" required autocomplete="off">
+
+                    <button type="submit">Add</button>
+                </form>
+            </div>
+
+
         </div>
     </div>
 </div>

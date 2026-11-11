@@ -40,7 +40,6 @@
 /*################################calender################################*/
 #month {
     text-align: center;
-    text-transform: uppercase;
 }
 
 #days {
@@ -84,7 +83,7 @@
 }
 
 
-/*#################modal#########*/
+/*###########################modal######################################*/
 /* The overlay (background) */
 .modal-overlay {
   display: none;
@@ -120,4 +119,9 @@
 }
 .htmx-request.deleting, .htmx-request.loading {
     display: inline;
+}
+
+.todo-bullet{
+    display: flex;
+    justify-content: space-between;
 }
