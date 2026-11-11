@@ -121,7 +121,11 @@
     display: inline;
 }
 
-.todo-bullet{
+.todo-bottom{
     display: flex;
-    justify-content: space-between;
+    margin-top: auto;
+}
+
+.todo-mid{
+    align-content: center;
 }

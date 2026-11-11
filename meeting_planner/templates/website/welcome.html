@@ -5,7 +5,6 @@
 
 {% block extra_scripts %}
 <script defer src="{% static 'website/welcome.js' %}"></script>
-<script defer src="{% static 'website/todo-count.js' %}"></script>
 <script defer src="{% static 'website/confirm-dialog.js' %}"></script>
 <script src="https://unpkg.com/htmx.org@2.0.4"
     integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+"
@@ -126,23 +125,17 @@
                 <!-- Loading indicators -->
                 <div class="deleting">deleting...</div>
                 <div class="loading">loading...</div>
-                
-
-                
-                <!-- Todo count -->
-                <div style="margin-top: 0;">
-                    <span id="todo-count">{{ todos.count }}</span> items
-                </div>
+            
             </div>
             <div class="todo-bottom">
                 <!-- Add todo -->
-                <form hx-post="{% url 'todo_create' %}" hx-target="#todo-list" hx-swap="afterbegin"
+                <form class="form" hx-post="{% url 'todo_create' %}" hx-target="#todo-list" hx-swap="afterbegin"
                     hx-on::after-request="if(event.detail.successful) this.reset()">
                     {% csrf_token %}
 
-                    <input type="text" name="name" placeholder="New todo" required autocomplete="off">
+                    <input type="text" name="name" placeholder="Add new item" required autocomplete="off">
 
-                    <button type="submit">Add</button>
+                    <button class="in-button" type="submit">Add</button>
                 </form>
             </div>
 
