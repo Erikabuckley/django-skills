@@ -1,0 +1,12 @@
+<li id="todo-{{ todo.id }}">
+    <div id="error" hx-swap-oob="true" style="color:red;"></div>
+    <span>{{ todo.name }}</span>
+    <button
+        hx-post="{% url 'todo_complete' todo.id %}"
+        hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+        hx-target="closest li"
+        hx-swap="outerHTML"
+        hx-confirm="Mark this todo as completed?">
+        Complete
+    </button>
+</li>

@@ -3,14 +3,14 @@ from django.forms import modelform_factory
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.utils import timezone
-from django.views.decorators.http import require_GET
+from django.views.decorators.http import require_GET, require_POST
 from django.shortcuts import render, get_object_or_404, redirect
 
 from datetime import datetime, timedelta
 
-from meetings.models import Meeting, Room
+from meetings.models import Meeting, Room, Todo
 
 # creates a template for the meeting form
 MeetingForm = modelform_factory(
@@ -154,3 +154,79 @@ def get_dates(request):
     dates = sorted(set(meeting.date.day for meeting in meetings))
 
     return JsonResponse({"dates": dates})
+
+# gets todo list
+@login_required
+def todo_list(request):
+    todos = Todo.objects.filter(
+        user=request.user
+    )
+
+    return render(request, "website/todo_list.html", {
+        "todos": todos
+    })
+    
+@login_required
+@require_POST
+def todo_create(request):
+
+    name = request.POST.get("name", "").strip()
+
+    if not name:
+        return render(
+            request,
+            "website/todo_error.html",
+            {"error": "Please enter a task."},
+            status=400
+        )
+    
+    existing_todo = Todo.objects.filter(
+        user=request.user,
+        name__iexact=name
+    ).exists()
+
+    if existing_todo:
+        return render(
+            request,
+            "website/todo_error.html",
+            {"error": "Todo already exists"}
+        )
+    todo = Todo.objects.create(
+        user=request.user,
+        name=name
+    )
+
+    return render(request, "website/todo_item.html", {
+        "todo": todo
+    })
+    
+@login_required
+@require_GET
+def todo_search(request):
+
+    search_text = request.GET.get("searchText", "").strip()
+
+    todos = Todo.objects.filter(
+        user=request.user,
+        name__icontains=search_text,
+        done=False
+    )
+
+    return render(request, "website/todo_results.html", {
+        "todos": todos
+    })
+    
+@login_required
+@require_POST
+def todo_complete(request, todo_id):
+    todo = get_object_or_404(
+        Todo,
+        id=todo_id,
+        user=request.user,
+        done=False
+    )
+
+    todo.done = True
+    todo.save()
+
+    return HttpResponse(status=200)

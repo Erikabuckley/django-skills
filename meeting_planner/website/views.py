@@ -9,13 +9,13 @@ from django.utils import timezone
 from django.views.decorators.http import require_GET
 from django.views.decorators.cache import never_cache
 
-from meetings.models import Meeting
+from meetings.models import Meeting, Todo
 
 logger = logging.getLogger(__name__)
 load_dotenv()
 
 
-# loads welcome page and filters data dependant on authentication leel
+# loads welcome page and filters data dependant on authentication level
 def welcome(request):
     if request.user.is_authenticated:
         context = {
@@ -25,6 +25,7 @@ def welcome(request):
             "pastmeetings": Meeting.objects.filter(
                 participants__id=request.user.id, date__lt=timezone.now()
             ).order_by("-date"),
+            "todos" : Todo.objects.filter(user=request.user, done=False)
         }
 
     else:

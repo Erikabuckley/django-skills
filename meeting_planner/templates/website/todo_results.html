@@ -1,0 +1,5 @@
+{% for todo in todos %}
+    {% include "website/todo_item.html" %}
+{% empty %}
+    <li>No matching todos found.</li>
+{% endfor %}

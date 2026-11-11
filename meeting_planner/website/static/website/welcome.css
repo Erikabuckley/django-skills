@@ -37,7 +37,7 @@
     font-weight: bold;
 }
 
-/*################################callender################################*/
+/*################################calender################################*/
 #month {
     text-align: center;
     text-transform: uppercase;
@@ -112,4 +112,12 @@
   border-radius: 10px;
   color: var(--main);
   z-index: 100;
+}
+
+/*###########################################todo list###########*/
+.deleting, .loading {
+    display: none;
+}
+.htmx-request.deleting, .htmx-request.loading {
+    display: inline;
 }

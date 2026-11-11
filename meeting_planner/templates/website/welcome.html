@@ -5,23 +5,29 @@
 
 {% block extra_scripts %}
 <script defer src="{% static 'website/welcome.js' %}"></script>
+<script defer src="{% static 'website/todo-count.js' %}"></script>
+<script defer src="{% static 'website/confirm-dialog.js' %}"></script>
+<script src="https://unpkg.com/htmx.org@2.0.4"
+    integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+"
+    crossorigin="anonymous"></script>
+
 <link rel="stylesheet" href="{% static 'website/welcome.css' %}">
 {% endblock %}
 
 {% block content%}
 
 <div id="modal" class="modal-overlay">
-        <div class="modal-box">
-            <form class="form" method="post" style="align-items: center;">
-                {% csrf_token %}
-                <h1>Cookie alert</h1>
-                <img src="{% static 'website/image.png' %}" height="100" width="100">
-                <label for="cookie"></label>
-                <input required id="cookie" type="text" placeholder="Type your favourite cookie">
-                <button type="submit" id="closeBtn" class="in-button">Submit</button>
-            </form>
-        </div>
+    <div class="modal-box">
+        <form class="form" method="post" style="align-items: center;">
+            {% csrf_token %}
+            <h1>Cookie alert</h1>
+            <img src="{% static 'website/image.png' %}" height="100" width="100">
+            <label for="cookie"></label>
+            <input required id="cookie" type="text" placeholder="Type your favourite cookie">
+            <button type="submit" id="closeBtn" class="in-button">Submit</button>
+        </form>
     </div>
+</div>
 <div class="home">
 
     <div>
@@ -112,6 +118,43 @@
             {%else%}
             <p>To view future meetings please log in</p>
             {%endif%}
+        </div>
+    </div>
+    <div class="card horisontal">
+        <div class="item dash todo">
+            <h2>My To-do List</h2>
+            <dialog id="confirm-dialog">
+                <p id="confirm-message"></p>
+                <button id="confirm-ok-button">Yes</button>
+                <button id="confirm-cancel-button">No</button>
+            </dialog>
+            <!-- Search todos -->
+            <input type="search" name="searchText" placeholder="Search..." hx-get="{% url 'todo_search' %}"
+                hx-target="#todo-list" hx-swap="innerHTML" hx-trigger="input changed delay:500ms">
+
+            <!-- Add todo -->
+            <form hx-post="{% url 'todo_create' %}" hx-target="#todo-list" hx-swap="afterbegin"
+                hx-on::after-request="if(event.detail.successful) this.reset()">
+                {% csrf_token %}
+
+                <input type="text" name="name" placeholder="New todo" required autocomplete="off">
+
+                <button type="submit">Add</button>
+            </form>
+
+            <!-- Error messages -->
+            <div id="error"></div>
+
+            <!-- Todo list -->
+            {% include "website/todo_list.html" %}
+
+            <!-- Loading indicators -->
+            <div class="deleting">deleting...</div>
+            <div class="loading">loading...</div>
+            <!-- Todo count -->
+            <div style="margin-top: 0;">
+                <span id="todo-count">{{ todos.count }}</span> items
+            </div>
         </div>
     </div>
 </div>
