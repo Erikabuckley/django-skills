@@ -74,7 +74,12 @@
 
 
 .home {
+    height: 100%;
     display: flex;
+}
+
+.home-block{
+    height: 100%;
 }
 
 .dark-mode #reveal {

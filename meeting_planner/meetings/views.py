@@ -26,7 +26,7 @@ MeetingForm = modelform_factory(
 def check_overlap(form, new):
     meeting = form.save(commit=False)
 
-    meetings = Meeting.objects.filter(date=meeting.date, room=meeting.room)
+    meetings = Meeting.objects.filter(date=meeting.date, room=meeting.room).exclude(pk=meeting.pk)
 
     new_start = datetime.combine(meeting.date, meeting.start_time)
     new_end = new_start + timedelta(hours=meeting.duration)
@@ -44,7 +44,7 @@ def check_overlap(form, new):
     if new:
         return redirect("welcome")
     else:
-        return redirect("detail", id)
+        return redirect("detail", id=meeting.pk)
 
 
 # view to send sign up data to the backend
