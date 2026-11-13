@@ -28,9 +28,9 @@
     </div>
 </div>
 <div class="home">
-    <div>
-        <div class="card">
-            <div class="item dash meetings">
+    <div class="home-block">
+        <div class="block">
+            <div class="item dash ">
                 <h2>Your meetings</h2>
                 {% if user.is_authenticated %}
                 {% for meeting in meetings %}
@@ -67,7 +67,7 @@
             </div>
         </div>
 
-        <div class="card">
+        <div class="block">
             <div class="item dash">
                 <h2>Rooms List</h2>
                 <a href="{%url 'rooms'%}"><img src="{% static 'website/floorplan.png' %}" width="150" height="150"
@@ -76,7 +76,7 @@
                 <p style=" margin-top:auto;">Click floorplan to view the rooms</a></p>
             </div>
 
-            <div class="item dash meetings">
+            <div class="item dash">
                 <h2>Past Meetings</h2>
                 {% if user.is_authenticated %}
                 {% for meeting in pastmeetings %}
@@ -101,7 +101,7 @@
     </div>
 
 
-    <div class="card">
+    <div class="home-block block">
         <div class="item dash todo">
             <div class="todo-top">
                 <h2>My To-do List</h2>
