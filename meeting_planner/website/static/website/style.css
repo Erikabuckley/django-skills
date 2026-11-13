@@ -58,6 +58,22 @@ input {
     width: 100%;
 }
 
+dialog {
+    border: none;
+    padding: 20px;
+    gap: 1rem;
+    background-color: var(--light);
+    color: var(--main);
+    border-radius: 10px;
+
+}
+
+.d-buttons{
+    display: flex;
+    justify-content : center;
+    gap: 10px;
+}
+
 /*##############################################ALL#####################################*/
 
 .actions {

@@ -1,12 +1,12 @@
-<div id="todo-{{ todo.id }} todo-bullet">
+<div id="todo-{{ todo.id }}" class="todo-bullet">
     <span>{{ todo.name }}</span>
     <button
         hx-post="{% url 'todo_complete' todo.id %}"
         hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
         hx-target="closest div"
         hx-swap="outerHTML"
-        hx-confirm="Mark this todo as completed?"
-        class="in-button">
-        Done
+        hx-confirm="Mark this item as completed?"
+        class="in-button checkmark">
+        ✓
     </button>
 </div>

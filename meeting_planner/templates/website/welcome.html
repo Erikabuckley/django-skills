@@ -101,45 +101,47 @@
     </div>
 
 
-    <div class="home-block block">
-        <div class="item dash todo">
-            <div class="todo-top">
-                <h2>My To-do List</h2>
-                <dialog id="confirm-dialog">
-                    <p id="confirm-message"></p>
-                    <button id="confirm-ok-button">Yes</button>
-                    <button id="confirm-cancel-button">No</button>
-                </dialog>
-                <!-- Search todos -->
-                <input type="search" name="searchText" placeholder="Search..." hx-get="{% url 'todo_search' %}"
-                    hx-target="#todo-list" hx-swap="innerHTML" hx-trigger="input changed delay:500ms">
+    <div class="home-block">
+        <div class="block">
+            <div class="item dash todo">
+                <div class="todo-top">
+                    <h2>My To-do List</h2>
+                    <dialog id="confirm-dialog">
+                        <h2 id="confirm-message"></h2>
+                        <div class="d-buttons">
+                            <button class="in-button" id="confirm-ok-button">Yes</button>
+                            <button class="in-button" id="confirm-cancel-button">No</button>
+                        </div>
+                    </dialog>
+                    <!-- Search todos -->
+                    <input type="search" name="searchText" placeholder="Search..." hx-get="{% url 'todo_search' %}"
+                        hx-target="#todo-list" hx-swap="innerHTML" hx-trigger="input changed delay:500ms">
+                </div>
+                
+                <div class="todo-mid">
+                    <!-- Error messages -->
+                    <div id="error"></div>
+
+                    <!-- Todo list -->
+                    {% include "website/todo_list.html" %}
+
+                    <!-- Loading indicators -->
+                    <div class="deleting">deleting...</div>
+                    <div class="loading">loading...</div>
+                
+                </div>
+                <div class="todo-bottom">
+                    <!-- Add todo -->
+                    <form class="form" hx-post="{% url 'todo_create' %}" hx-target="#todo-list" hx-swap="afterbegin"
+                        hx-on::after-request="if(event.detail.successful) this.reset()">
+                        {% csrf_token %}
+
+                        <input type="text" name="name" placeholder="Add new item" required autocomplete="off" maxlength="30">
+
+                        <button class="in-button" type="submit">Add</button>
+                    </form>
+                </div>
             </div>
-            
-            <div class="todo-mid">
-                <!-- Error messages -->
-                <div id="error"></div>
-
-                <!-- Todo list -->
-                {% include "website/todo_list.html" %}
-
-                <!-- Loading indicators -->
-                <div class="deleting">deleting...</div>
-                <div class="loading">loading...</div>
-            
-            </div>
-            <div class="todo-bottom">
-                <!-- Add todo -->
-                <form class="form" hx-post="{% url 'todo_create' %}" hx-target="#todo-list" hx-swap="afterbegin"
-                    hx-on::after-request="if(event.detail.successful) this.reset()">
-                    {% csrf_token %}
-
-                    <input type="text" name="name" placeholder="Add new item" required autocomplete="off">
-
-                    <button class="in-button" type="submit">Add</button>
-                </form>
-            </div>
-
-
         </div>
     </div>
 </div>

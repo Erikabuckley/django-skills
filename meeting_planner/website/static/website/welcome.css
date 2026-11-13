@@ -68,6 +68,11 @@
 }
 
 .hasEvent {
+    background-color: grey;
+    color: var(--light)
+}
+
+.currentDay {
     background-color: var(--main);
     color: var(--light)
 }
@@ -78,8 +83,8 @@
     display: flex;
 }
 
-.home-block{
-    height: 100%;
+.home-block:last-child{
+    display: flex;
 }
 
 .dark-mode #reveal {
@@ -132,7 +137,24 @@
 }
 
 .todo-mid{
+    padding: 1rem;
     align-content: center;
+    width: 100%;
+}
+
+#todo-list{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.todo-bullet{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.checkmark{
+    padding: 0px 4px;
 }
 
 

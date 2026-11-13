@@ -19,12 +19,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 render_env = Path("/etc/secrets/.env")
 local_env = BASE_DIR / ".env"
-print("hello")
 if render_env.is_file():
-    print("render")
+    print("Running in render")
     load_dotenv(Path("/etc/secrets/.env"), override=False)
 else:
-    print("local")
+    print("Running locally")
     load_dotenv(BASE_DIR / ".env")
 
 # Quick-start development settings - unsuitable for production

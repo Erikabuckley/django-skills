@@ -176,6 +176,9 @@ async function highlightDays() {
             if (daysWithEvents.includes(Number(day.textContent))) {
                 day.classList.add("hasEvent");
             }
+            if (day.textContent == new Date().getDate()){
+                day.classList.add("currentDay");
+            }
         });
     } catch (error) {
         console.error(error);
