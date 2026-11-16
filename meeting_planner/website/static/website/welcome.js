@@ -100,12 +100,12 @@ showRiddle();
 async function showRiddle() {
   try {
 
-    document.getElementById("riddle").textContent = 'test12345';    
-    // const riddle =  await getRiddle();
+    // document.getElementById("riddle").textContent = 'test12345';    
+    const riddle =  await getRiddle();
 
-    // document.getElementById("riddle").textContent = `${riddle.riddle}`;    
+    document.getElementById("riddle").textContent = `${riddle.riddle}`;    
       
-    // document.getElementById("answer").textContent = `${riddle.answer}`;
+    document.getElementById("answer").textContent = `${riddle.answer}`;
 
   } catch (error) {
     document.getElementById("riddle").textContent =
@@ -204,7 +204,6 @@ function closeModal(event) {
 
     if (cookieInput.value.trim() !== "") {
 
-        // Store cookie for 30 days
         document.cookie = "modalCompleted=true; max-age=3600; path=/; SameSite=Lax";
 
         modal.classList.remove("show");
